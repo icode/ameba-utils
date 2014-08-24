@@ -10,7 +10,6 @@ import java.lang.reflect.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -415,11 +414,7 @@ public class ClassUtils {
     }
 
     public static URI toURI(String name) {
-        try {
-            return new URI(name);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        return URI.create(name);
     }
 
     public static String getMethodFullName(String name, Class<?>[] parameterTypes) {
