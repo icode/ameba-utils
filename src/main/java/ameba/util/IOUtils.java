@@ -13,7 +13,7 @@ import java.util.Properties;
  * @author ICode
  * @since 13-8-14 下午7:33
  */
-public class IOUtils extends org.apache.commons.io.IOUtils{
+public class IOUtils extends org.apache.commons.io.IOUtils {
 
     private static final int DEFAULT_BUFFER_SIZE = 4096;
 
@@ -93,8 +93,11 @@ public class IOUtils extends org.apache.commons.io.IOUtils{
         if (in == null) {
             return null;
         }
-
-        return read(in);
+        try {
+            return read(in);
+        } finally {
+            closeQuietly(in);
+        }
     }
 
     public static byte[] readByteArrayFromResource(String resource) throws IOException {
@@ -103,7 +106,11 @@ public class IOUtils extends org.apache.commons.io.IOUtils{
             return null;
         }
 
-        return readByteArray(in);
+        try {
+            return readByteArray(in);
+        } finally {
+            closeQuietly(in);
+        }
     }
 
     public static byte[] readByteArray(InputStream input) throws IOException {
@@ -113,10 +120,8 @@ public class IOUtils extends org.apache.commons.io.IOUtils{
     }
 
     public static String read(Reader reader) {
+        StringWriter writer = new StringWriter();
         try {
-
-            StringWriter writer = new StringWriter();
-
             char[] buffer = new char[DEFAULT_BUFFER_SIZE];
             int n;
             while (-1 != (n = reader.read(buffer))) {
@@ -211,32 +216,5 @@ public class IOUtils extends org.apache.commons.io.IOUtils{
             // skip
         }
         return null;
-    }
-
-    public static Class<?> loadClass(String className) {
-        Class<?> clazz = null;
-
-        if (className == null) {
-            return null;
-        }
-
-        ClassLoader ctxClassLoader = Thread.currentThread().getContextClassLoader();
-        if (ctxClassLoader != null) {
-            try {
-                clazz = ctxClassLoader.loadClass(className);
-            } catch (ClassNotFoundException ex) {
-                // skip
-            }
-        }
-
-        if (clazz != null) {
-            return clazz;
-        }
-
-        try {
-            return Class.forName(className);
-        } catch (ClassNotFoundException e1) {
-            return null;
-        }
     }
 }
