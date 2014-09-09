@@ -6,7 +6,7 @@
 
     <groupId>org.amebastack</groupId>
     <artifactId>ameba-utils</artifactId>
-    <version>0.1.6a</version>
+    <version>0.1.6c</version>
     <name>Ameba-Framework-Utils</name>
     <description>A useful Java framework utils!</description>
 
@@ -174,7 +174,7 @@
         <!--<asm.version>5.0.3</asm.version>-->
         <javassist.version>3.18.2-GA</javassist.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
-        <guava.version>17.0</guava.version>
+        <guava.version>18.0</guava.version>
         <commons.collections.version>4.0</commons.collections.version>
         <jaxrs.api.version>2.0</jaxrs.api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
