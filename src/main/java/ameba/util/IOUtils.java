@@ -3,11 +3,13 @@ package ameba.util;
 import com.google.common.collect.Lists;
 
 import java.io.*;
+import java.net.JarURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.Properties;
+import java.util.jar.Manifest;
 
 /**
  * @author ICode
@@ -180,41 +182,24 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return buf.toString();
     }
 
-    public static Boolean getBoolean(Properties properties, String key) {
-        String property = properties.getProperty(key);
-        if ("true".equals(property)) {
-            return Boolean.TRUE;
-        } else if ("false".equals(property)) {
-            return Boolean.FALSE;
-        }
-        return null;
+    public static String getJarImplVersion(Class clazz) {
+        return getJarManifestValue(clazz, "Implementation-Version");
     }
 
-    public static Integer getInteger(Properties properties, String key) {
-        String property = properties.getProperty(key);
-
-        if (property == null) {
-            return null;
-        }
-        try {
-            return Integer.parseInt(property);
-        } catch (NumberFormatException ex) {
-            // skip
-        }
-        return null;
-    }
-
-    public static Long getLong(Properties properties, String key) {
-        String property = properties.getProperty(key);
-
-        if (property == null) {
-            return null;
-        }
-        try {
-            return Long.parseLong(property);
-        } catch (NumberFormatException ex) {
-            // skip
-        }
+    public static String getJarManifestValue(Class clazz, String attrName) {
+        URL url = getResource("/" + clazz.getName().replace('.', '/')
+                + ".class");
+        if (url != null)
+            try {
+                URLConnection uc = url.openConnection();
+                if (uc instanceof java.net.JarURLConnection) {
+                    JarURLConnection juc = (JarURLConnection) uc;
+                    Manifest m = juc.getManifest();
+                    return m.getMainAttributes().getValue(attrName);
+                }
+            } catch (IOException e) {
+                return null;
+            }
         return null;
     }
 }

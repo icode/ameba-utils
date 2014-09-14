@@ -1,6 +1,7 @@
 package ameba.util;
 
-import java.lang.IllegalArgumentException;import java.lang.Integer;import java.lang.String;import java.util.regex.Matcher;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -14,6 +15,7 @@ public class Times {
 
     /**
      * Parse a duration
+     *
      * @param duration 3h, 2mn, 7s
      * @return The number of seconds
      */
@@ -43,5 +45,21 @@ public class Times {
             throw new IllegalArgumentException("Invalid duration pattern : " + duration);
         }
         return toAdd;
+    }
+
+    public static String toDuration(long time) {
+        String duration = null;
+        if (time >= 86400000) {
+            duration = TimeUnit.MILLISECONDS.toMinutes(time) + " d";
+        } else if (time >= 3600000) {
+            duration = TimeUnit.MILLISECONDS.toMinutes(time) + " h";
+        } else if (time >= 60000) {
+            duration = TimeUnit.MILLISECONDS.toMinutes(time) + " min";
+        } else if (time < 1000) {
+            duration = time + " ms";
+        } else {
+            duration = TimeUnit.MILLISECONDS.toSeconds(time) + " s";
+        }
+        return duration;
     }
 }
