@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.lang.reflect.*;
 import java.net.URL;
-import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -56,37 +55,6 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
             throw new IllegalStateException(e.getMessage(), e);
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException(e.getMessage(), e);
-        }
-    }
-
-
-    public static int getSize(Object object) {
-        if (object == null) {
-            return 0;
-        } else if (object instanceof Collection<?>) {
-            return ((Collection<?>) object).size();
-        } else if (object instanceof Map<?, ?>) {
-            return ((Map<?, ?>) object).size();
-        } else if (object instanceof Object[]) {
-            return ((Object[]) object).length;
-        } else if (object instanceof int[]) {
-            return ((int[]) object).length;
-        } else if (object instanceof long[]) {
-            return ((long[]) object).length;
-        } else if (object instanceof float[]) {
-            return ((float[]) object).length;
-        } else if (object instanceof double[]) {
-            return ((double[]) object).length;
-        } else if (object instanceof short[]) {
-            return ((short[]) object).length;
-        } else if (object instanceof byte[]) {
-            return ((byte[]) object).length;
-        } else if (object instanceof char[]) {
-            return ((char[]) object).length;
-        } else if (object instanceof boolean[]) {
-            return ((boolean[]) object).length;
-        } else {
-            return -1;
         }
     }
 
@@ -141,16 +109,6 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
 
     public static boolean isBeforeJava6(String javaVersion) {
         return isBeforeJava5(javaVersion) || "1.5".equals(javaVersion);
-    }
-
-    public static String getSizeMethod(Class<?> cls, String[] sizers) {
-        for (String sizer : sizers) {
-            try {
-                return cls.getMethod(sizer, new Class<?>[0]).getName() + "()";
-            } catch (NoSuchMethodException e) {
-            }
-        }
-        return null;
     }
 
     @SuppressWarnings("unchecked")
