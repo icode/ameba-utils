@@ -32,7 +32,7 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
     }
 
     public static InputStream getResourceAsStream(String resource) {
-        InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
+        InputStream in = ClassUtils.getContextClassLoader().getResourceAsStream(resource);
         if (in == null) {
             in = IOUtils.class.getResourceAsStream(resource);
         }
@@ -43,7 +43,7 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
     public static Enumeration<URL> getResources(String resource) {
         Enumeration<URL> urls = null;
         try {
-            urls = Thread.currentThread().getContextClassLoader().getResources(resource);
+            urls = ClassUtils.getContextClassLoader().getResources(resource);
         } catch (IOException e) {
             //noop
         }
@@ -71,7 +71,7 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
     }
 
     public static URL getResource(String resource) {
-        URL url = Thread.currentThread().getContextClassLoader().getResource(resource);
+        URL url = ClassUtils.getContextClassLoader().getResource(resource);
         if (url == null) {
             url = IOUtils.class.getResource(resource);
         }
