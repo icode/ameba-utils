@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.reflect.*;
 import java.net.URL;
 import java.util.Collection;
@@ -189,14 +187,6 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
             }
         }
         return result;
-    }
-
-    public static String dumpException(Throwable e) {
-        StringWriter sw = new StringWriter(160);
-        sw.write(e.getClass().getName());
-        sw.write(":\n");
-        e.printStackTrace(new PrintWriter(sw));
-        return sw.toString();
     }
 
 }
