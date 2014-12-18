@@ -46,9 +46,9 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         return urls;
     }
 
-    public static Object newInstance(String name) {
+    public static <T> T newInstance(String name) {
         try {
-            return getClass(name).newInstance();
+            return (T) getClass(name).newInstance();
         } catch (InstantiationException e) {
             throw new IllegalStateException(e.getMessage(), e);
         } catch (IllegalAccessException e) {
@@ -57,6 +57,31 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
+
+    public static <T> T newInstance(Class clazz, Object... args) {
+
+        if (clazz == null) return null;
+
+        Class[] argsClass = new Class[args.length];
+
+        for (int i = 0; i < args.length; i++) {
+            argsClass[i] = args[i] == null ? null : args[i].getClass();
+        }
+
+        try {
+            Constructor<T> constructor = clazz.<T>getConstructor(argsClass);
+            return constructor.newInstance(args);
+        } catch (InstantiationException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        } catch (IllegalAccessException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        } catch (InvocationTargetException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
+    }
+
 
     public static Class<?> getGenericClass(Class<?> cls) {
         return getGenericClass(cls, 0);
