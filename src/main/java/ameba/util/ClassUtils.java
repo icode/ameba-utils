@@ -62,11 +62,7 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
 
         if (clazz == null) return null;
 
-        Class[] argsClass = new Class[args.length];
-
-        for (int i = 0; i < args.length; i++) {
-            argsClass[i] = args[i] == null ? null : args[i].getClass();
-        }
+        Class[] argsClass = getArgsClasses(args);
 
         try {
             Constructor<T> constructor = clazz.<T>getConstructor(argsClass);
@@ -78,6 +74,29 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         } catch (NoSuchMethodException e) {
             throw new IllegalStateException(e.getMessage(), e);
         } catch (InvocationTargetException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
+    }
+
+    private static Class[] getArgsClasses(Object... args) {
+        Class[] argsClass = new Class[args.length];
+
+        for (int i = 0; i < args.length; i++) {
+            argsClass[i] = args[i] == null ? null : args[i].getClass();
+        }
+        return argsClass;
+    }
+
+    public static <T> T invoke(Object instance, String method, Object... args) {
+        if (instance == null) return null;
+        try {
+            Method m = getPublicMethod(instance.getClass(), method, getArgsClasses(args));
+            return (T) m.invoke(instance,args);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        } catch (InvocationTargetException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        } catch (IllegalAccessException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
