@@ -1,6 +1,7 @@
 package ameba.util;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author ICode
@@ -34,7 +35,27 @@ public class LinkedProperties extends Properties {
 
     @Override
     public synchronized Object put(Object key, Object value) {
-        return linkMap.put(key, value);
+        if (value instanceof String
+                && key instanceof String) {
+            boolean append = ((String) key).endsWith("+");
+            boolean remove = ((String) key).endsWith("-");
+            if (append || remove) {
+                key = ((String) key).substring(0, ((String) key).length() - 1);
+                Object v = linkMap.get(key);
+                if (v instanceof String) {
+                    if (append) {
+                        value = v + "," + value;
+                    } else {
+                        value = ((String) v).replaceAll(Pattern.quote((String) value), "").replaceAll(",{2,}",",");
+                    }
+                } else if (remove) {
+                    key = null;
+                }
+            }
+        }
+        if (key != null)
+            return linkMap.put(key, value);
+        else return null;
     }
 
     @Override
