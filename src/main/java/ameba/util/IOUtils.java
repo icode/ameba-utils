@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 
 import java.io.*;
 import java.net.JarURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
@@ -56,18 +57,50 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         }
 
         if (urls == null) {
-            final Iterator<URL> it = Lists.newArrayList(IOUtils.class.getResource(resource)).iterator();
-            urls = new Enumeration<URL>() {
-                public boolean hasMoreElements() {
-                    return it.hasNext();
-                }
+            URL url = IOUtils.class.getResource(resource);
+            if (url != null) {
+                final Iterator<URL> it = Lists.newArrayList(url).iterator();
+                urls = new Enumeration<URL>() {
+                    public boolean hasMoreElements() {
+                        return it.hasNext();
+                    }
 
-                public URL nextElement() {
-                    return it.next();
-                }
-            };
+                    public URL nextElement() {
+                        return it.next();
+                    }
+                };
+            }
         }
-        return urls;
+
+        if (urls == null) {
+            File file = new File(resource);
+            if (file.isFile()) {
+                try {
+                    final Iterator<URL> it = Lists.newArrayList(file.toURI().toURL()).iterator();
+                    urls = new Enumeration<URL>() {
+                        public boolean hasMoreElements() {
+                            return it.hasNext();
+                        }
+
+                        public URL nextElement() {
+                            return it.next();
+                        }
+                    };
+                } catch (MalformedURLException e) {
+                    //no op
+                }
+            }
+        }
+
+        return urls == null ? new Enumeration<URL>() {
+            public boolean hasMoreElements() {
+                return false;
+            }
+
+            public URL nextElement() {
+                return null;
+            }
+        } : urls;
     }
 
     public static URL getResource(String resource) {
