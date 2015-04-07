@@ -172,7 +172,7 @@
         <commons.io.version>2.4</commons.io.version>
         <akka.version>2.3.6</akka.version>
         <!--<asm.version>5.0.3</asm.version>-->
-        <javassist.version>3.18.2-GA</javassist.version>
+        <javassist.version>3.19.0-GA</javassist.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <guava.version>18.0</guava.version>
         <commons.collections.version>4.0</commons.collections.version>
