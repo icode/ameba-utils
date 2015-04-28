@@ -111,6 +111,15 @@ public class Result {
         private String description;
         private String source;
 
+        public Error(String message) {
+            this.message = message;
+        }
+
+        public Error(String source, String message) {
+            this.message = message;
+            this.source = source;
+        }
+
         public Error(Integer code, String message) {
             this.code = code;
             this.message = message;
@@ -126,6 +135,12 @@ public class Result {
             this.code = code;
             this.message = message;
             this.description = description;
+        }
+
+        public Error(String message, String description, String source) {
+            this.message = message;
+            this.description = description;
+            this.source = source;
         }
 
         public Error(Integer code, String message, String description, String source) {
