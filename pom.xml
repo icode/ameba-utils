@@ -151,6 +151,12 @@
             <artifactId>akka-actor_2.10</artifactId>
             <version>${akka.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.7</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -174,6 +180,7 @@
 
     <properties>
         <commons.io.version>2.4</commons.io.version>
+        <joda-time.version>2.7</joda-time.version>
         <akka.version>2.3.6</akka.version>
         <!--<asm.version>5.0.3</asm.version>-->
         <javassist.version>3.19.0-GA</javassist.version>
