@@ -91,7 +91,7 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         if (instance == null) return null;
         try {
             Method m = getPublicMethod(instance.getClass(), method, getArgsClasses(args));
-            return (T) m.invoke(instance,args);
+            return (T) m.invoke(instance, args);
         } catch (NoSuchMethodException e) {
             throw new IllegalStateException(e.getMessage(), e);
         } catch (InvocationTargetException e) {
@@ -153,6 +153,42 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
 
     public static boolean isBeforeJava6(String javaVersion) {
         return isBeforeJava5(javaVersion) || "1.5".equals(javaVersion);
+    }
+
+
+    public static String toString(Class clazz, Method method) {
+        try {
+            if (clazz == null) {
+                clazz = method.getDeclaringClass();
+            }
+            StringBuilder sb = new StringBuilder();
+            int mod = method.getModifiers() & Modifier.methodModifiers();
+            if (mod != 0) {
+                sb.append(Modifier.toString(mod)).append(' ');
+            }
+            sb.append(method.getReturnType().getName()).append(' ');
+            sb.append(clazz.getName()).append('.');
+            sb.append(method.getName()).append('(');
+            Class<?>[] params = method.getParameterTypes(); // avoid clone
+            for (int j = 0; j < params.length; j++) {
+                sb.append(params[j].getName());
+                if (j < (params.length - 1))
+                    sb.append(',');
+            }
+            sb.append(')');
+            Class<?>[] exceptions = method.getExceptionTypes(); // avoid clone
+            if (exceptions.length > 0) {
+                sb.append(" throws ");
+                for (int k = 0; k < exceptions.length; k++) {
+                    sb.append(exceptions[k].getName());
+                    if (k < (exceptions.length - 1))
+                        sb.append(',');
+                }
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return "<" + e + ">";
+        }
     }
 
     @SuppressWarnings("unchecked")
