@@ -6,7 +6,7 @@
 
     <groupId>org.amebastack</groupId>
     <artifactId>ameba-utils</artifactId>
-    <version>0.1.6e</version>
+    <version>0.1.7</version>
     <name>Ameba-Framework-Utils</name>
     <description>A useful Java framework utils!</description>
 
@@ -123,7 +123,7 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-io</groupId>
+            <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons.io.version}</version>
         </dependency>
@@ -148,7 +148,7 @@
         <!--akka-->
         <dependency>
             <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.10</artifactId>
+            <artifactId>akka-actor_2.11</artifactId>
             <version>${akka.version}</version>
         </dependency>
 
@@ -179,9 +179,9 @@
     </build>
 
     <properties>
-        <commons.io.version>2.4</commons.io.version>
+        <commons.io.version>1.3.2</commons.io.version>
         <joda-time.version>2.7</joda-time.version>
-        <akka.version>2.3.6</akka.version>
+        <akka.version>2.3.11</akka.version>
         <!--<asm.version>5.0.3</asm.version>-->
         <javassist.version>3.19.0-GA</javassist.version>
         <commons.lang3.version>3.4</commons.lang3.version>
