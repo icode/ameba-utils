@@ -51,6 +51,10 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
         initialise();
     }
 
+    public String getBeanName() {
+        return beanClass.getSimpleName();
+    }
+
     // Map interface
     //-------------------------------------------------------------------------
 
@@ -255,7 +259,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
                 return null;
             }
             try {
-                if (value instanceof BeanMap){
+                if (value instanceof BeanMap) {
                     value = ((BeanMap) value).bean;
                 }
 
@@ -278,7 +282,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
                 return;
             }
             try {
-                if (value instanceof BeanMap){
+                if (value instanceof BeanMap) {
                     value = ((BeanMap) value).bean;
                 }
                 handle.invoke(bean, value);
