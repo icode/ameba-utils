@@ -1,11 +1,9 @@
 package ameba.util;
 
+import ameba.util.bean.BeanMap;
 import org.junit.Test;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;

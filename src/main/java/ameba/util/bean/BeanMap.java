@@ -1,16 +1,14 @@
-package ameba.util;
+package ameba.util.bean;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.collections4.keyvalue.AbstractMapEntry;
 import org.apache.commons.lang3.StringUtils;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -18,19 +16,21 @@ import java.util.*;
  */
 public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable {
 
+    protected BeanTransformer transformer;
     /**
      * An empty array.  Used to invoke accessors via reflection.
      */
-    private transient T bean;
-    private transient Class<T> beanClass;
-    private transient Map<String, MethodHandle> readMethods = Maps.newHashMap();
-    private transient Map<String, MethodHandle> writeMethods = Maps.newHashMap();
-    private transient Map<String, Class<?>> types = Maps.newHashMap();
+    protected transient T bean;
+    protected transient Class<T> beanClass;
+    protected transient Map<String, BeanInvoker> readInvokers = Maps.newHashMap();
+    protected transient Map<String, BeanInvoker> writeInvokers = Maps.newHashMap();
+    protected transient Map<String, Class<?>> types = Maps.newLinkedHashMap();
 
     /**
      * Constructs a new empty <code>BeanMap</code>.
      */
     public BeanMap() {
+        transformer = BeanTransformer.DEFAULT;
     }
 
 
@@ -44,10 +44,15 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      *
      * @param bean the bean for this map to operate on
      */
-    @SuppressWarnings("unchecked")
     public BeanMap(T bean) {
+        transformer = BeanTransformer.DEFAULT;
         this.bean = bean;
-        this.beanClass = (Class<T>) bean.getClass();
+        initialise();
+    }
+
+    public BeanMap(T bean, BeanTransformer beanTransformer) {
+        this.transformer = beanTransformer;
+        this.bean = bean;
         initialise();
     }
 
@@ -129,7 +134,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
             // not readable, we can't get the value from the old map.  If
             // its not writable, we can't write a value into the new map.
             for (String key : types.keySet()) {
-                if (getWriteMethodHandle(key) != null) {
+                if (getReadInvoker(key) != null) {
                     newMap.put(key, get(key));
                 }
             }
@@ -150,7 +155,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      */
     public void putAllWriteable(BeanMap<T> map) {
         for (String key : map.types.keySet()) {
-            if (getWriteMethodHandle(key) != null) {
+            if (getWriteInvoker(key) != null) {
                 this.put(key, map.get(key));
             }
         }
@@ -216,26 +221,20 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     @Override
     public Object get(Object name) {
         if (bean != null) {
-            MethodHandle handle = getReadMethodHandle((String) name);
-            if (handle != null) {
+            BeanInvoker invoker = getReadInvoker((String) name);
+            if (invoker != null) {
                 try {
-                    Object obj = handle.invoke(bean);
-                    if (obj != null
-                            && !(obj instanceof Iterable)
-                            && !(obj instanceof Iterator)
-                            && !(obj instanceof Map)) {
-                        Class clazz = obj.getClass();
-                        if (!ClassUtils.isPrimitiveOrWrapper(clazz) && !clazz.isArray()) {
-                            return new BeanMap<>(obj);
-                        }
-                    }
-                    return obj;
+                    return transform(invoker);
                 } catch (Throwable e) {
                     throw new IllegalArgumentException(e);
                 }
             }
         }
         return null;
+    }
+
+    protected Object transform(BeanInvoker invoker) throws Throwable {
+        return transformer.transform(invoker.invoke());
     }
 
     /**
@@ -254,8 +253,8 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     public Object put(String name, Object value) throws IllegalArgumentException, ClassCastException {
         if (bean != null) {
             Object oldValue = get(name);
-            MethodHandle handle = getWriteMethodHandle(name);
-            if (handle == null) {
+            BeanInvoker invoker = getWriteInvoker(name);
+            if (invoker == null) {
                 return null;
             }
             try {
@@ -263,7 +262,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
                     value = ((BeanMap) value).bean;
                 }
 
-                handle.invoke(bean, value);
+                invoker.invoke(value);
 
                 Object newValue = get(name);
                 firePropertyChange(name, oldValue, newValue);
@@ -277,7 +276,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
     public void set(String name, Object value) throws IllegalArgumentException, ClassCastException {
         if (bean != null) {
-            MethodHandle handle = getWriteMethodHandle(name);
+            BeanInvoker handle = getWriteInvoker(name);
             if (handle == null) {
                 return;
             }
@@ -285,7 +284,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
                 if (value instanceof BeanMap) {
                     value = ((BeanMap) value).bean;
                 }
-                handle.invoke(bean, value);
+                handle.invoke(value);
                 firePropertyChange(name, null, value);
             } catch (Throwable e) {
                 throw new IllegalArgumentException(e.getMessage());
@@ -460,15 +459,15 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      * @param name the name of the property
      * @return the accessor method for the property, or null
      */
-    public MethodHandle getReadMethodHandle(String name) {
-        MethodHandle handle;
-        if (readMethods.containsKey(name)) {
-            handle = readMethods.get(name);
+    public BeanInvoker getReadInvoker(String name) {
+        BeanInvoker invoker;
+        if (readInvokers.containsKey(name)) {
+            invoker = readInvokers.get(name);
         } else {
-            handle = getMethodHandle(HandleType.GET, name);
-            readMethods.put(name, handle);
+            invoker = getInvoker(HandleType.GET, name);
+            readInvokers.put(name, invoker);
         }
-        return handle;
+        return invoker;
     }
 
     /**
@@ -477,30 +476,38 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      * @param name the name of the property
      * @return the mutator method for the property, or null
      */
-    public MethodHandle getWriteMethodHandle(String name) {
-        MethodHandle handle;
-        if (writeMethods.containsKey(name)) {
-            handle = writeMethods.get(name);
+    public BeanInvoker getWriteInvoker(String name) {
+        BeanInvoker invoker;
+        if (writeInvokers.containsKey(name)) {
+            invoker = writeInvokers.get(name);
         } else {
-            handle = getMethodHandle(HandleType.SET, name);
-            writeMethods.put(name, handle);
+            invoker = getInvoker(HandleType.SET, name);
+            writeInvokers.put(name, invoker);
         }
-        return handle;
+        return invoker;
     }
 
-    private MethodHandle getMethodHandle(HandleType type, String name) {
-        try {
-            String m = type.name().toLowerCase() + StringUtils.capitalize(name);
-            MethodType methodType;
-            if (type == HandleType.GET) {
-                methodType = MethodType.methodType(types.get(name));
+    private BeanInvoker getInvoker(HandleType type, String name) {
+        if (types.containsKey(name)) {
+            if (getBean() instanceof Map) {
+                return new MapInvoker(name);
             } else {
-                methodType = MethodType.methodType(void.class, types.get(name));
+                try {
+                    final String m = type.name().toLowerCase() + StringUtils.capitalize(name);
+                    final MethodType methodType;
+                    if (type == HandleType.GET) {
+                        methodType = MethodType.methodType(types.get(name));
+                    } else {
+                        methodType = MethodType.methodType(void.class, types.get(name));
+                    }
+                    MethodHandle handle = MethodHandles.publicLookup().findVirtual(beanClass, m, methodType);
+                    return new MethodHandleInvoker(name, handle);
+                } catch (NoSuchMethodException | IllegalAccessException e) {
+                    // no op
+                }
             }
-            return MethodHandles.publicLookup().findVirtual(beanClass, m, methodType);
-        } catch (NoSuchMethodException | IllegalAccessException e) {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -508,32 +515,60 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      * Does introspection to find properties.
      */
     protected void reinitialise() {
-        readMethods.clear();
-        writeMethods.clear();
+        readInvokers.clear();
+        writeInvokers.clear();
         types.clear();
         initialise();
     }
 
-    private void initialise() {
+    protected String transformPropertyName(String name) {
+        return name;
+    }
+
+    @SuppressWarnings("unchecked")
+    protected void initialise() {
         if (getBean() == null) {
             return;
         }
 
-        try {
-            BeanInfo beanInfo = Introspector.getBeanInfo(beanClass);
-            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-            if (propertyDescriptors != null) {
-                for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-                    if (propertyDescriptor != null) {
-                        String name = propertyDescriptor.getName();
-                        if ("class".equals(name)) continue;
-                        Class<?> aType = propertyDescriptor.getPropertyType();
-                        types.put(name, aType);
+        this.beanClass = (Class<T>) bean.getClass();
+        if (!(getBean() instanceof Map)) {
+            Class currentClass = beanClass;
+
+            List<Class> classes = Lists.newLinkedList();
+
+            while (currentClass != null) {
+                classes.add(0, currentClass);
+                currentClass = currentClass.getSuperclass();
+            }
+
+            for (Class clazz : classes) {
+                for (Method m : clazz.getMethods()) {
+                    String name = m.getName();
+                    if (name.startsWith(HandleType.GET.name().toLowerCase()) && !name.equals("getClass")) {
+                        name = transformPropertyName(StringUtils.uncapitalize(name.substring(3)));
+                        if (StringUtils.isNotBlank(name)) {
+                            types.put(name, m.getReturnType());
+                        }
                     }
                 }
             }
-        } catch (IntrospectionException e) {
-            throw new IllegalArgumentException(e);
+        } else {
+            if (getBean() instanceof BeanMap) {
+                types = ((BeanMap) getBean()).types;
+                readInvokers = ((BeanMap) getBean()).readInvokers;
+                writeInvokers = ((BeanMap) getBean()).writeInvokers;
+                beanClass = (Class<T>) bean.getClass();
+                bean = (T) ((BeanMap) bean).getBean();
+            } else {
+                Set<Entry> entries = ((Map) getBean()).entrySet();
+                for (Entry entry : entries) {
+                    String name = transformPropertyName((String) entry.getKey());
+                    if (StringUtils.isNotBlank(name) && entry.getValue() != null) {
+                        types.put(name, entry.getValue().getClass());
+                    }
+                }
+            }
         }
     }
 
@@ -588,5 +623,35 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
             return oldValue;
         }
     }
+
+    private class MapInvoker extends BeanInvoker {
+        public MapInvoker(String methodName) {
+            super(methodName, bean);
+        }
+
+        @Override
+        public Object invoke(Object arg) throws Throwable {
+            return ((Map) getBean()).get(arg);
+        }
+    }
+
+    private class MethodHandleInvoker extends BeanInvoker {
+        private MethodHandle handle;
+
+        public MethodHandleInvoker(String methodName, MethodHandle handle) {
+            super(methodName, BeanMap.this.bean);
+            this.handle = handle;
+        }
+
+        @Override
+        public Object invoke(Object arg) throws Throwable {
+            if (arg == null) {
+                return handle.invoke(bean);
+            } else {
+                return handle.invoke(bean, arg);
+            }
+        }
+    }
+
 }
 
