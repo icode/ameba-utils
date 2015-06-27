@@ -8,6 +8,9 @@ import javax.ws.rs.core.NewCookie;
  * @since 13-8-21 上午7:48
  */
 public class Cookies {
+
+    public static final String DELETED_COOKIE_VALUE = "deleted";
+
     private Cookies() {
     }
 
@@ -28,7 +31,7 @@ public class Cookies {
          * @throws IllegalArgumentException if name is {@code null}.
          * @since 2.0
          */
-        return new NewCookie(name, null, null, null, Cookie.DEFAULT_VERSION + 999, null, 0, null, false, true);
+        return new NewCookie(name, DELETED_COOKIE_VALUE, "/", null, Cookie.DEFAULT_VERSION, null, 0, null, false, true);
     }
 
     public static NewCookie newHttpOnlyCookie(String name, String value) {
