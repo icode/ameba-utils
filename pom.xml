@@ -187,7 +187,7 @@
     <properties>
         <commons.io.version>2.4</commons.io.version>
         <joda-time.version>2.7</joda-time.version>
-        <akka.version>2.4-M2</akka.version>
+        <akka.version>2.3.11</akka.version>
         <javassist.version>3.20.0-GA</javassist.version>
         <commons.lang3.version>3.4</commons.lang3.version>
         <guava.version>18.0</guava.version>
