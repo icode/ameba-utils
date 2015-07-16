@@ -25,6 +25,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     protected transient Map<String, BeanInvoker> readInvokers = Maps.newHashMap();
     protected transient Map<String, BeanInvoker> writeInvokers = Maps.newHashMap();
     protected transient Map<String, Class<?>> types = Maps.newLinkedHashMap();
+    protected transient Map<String, HandleType> readHandleType = Maps.newHashMap();
 
     /**
      * Constructs a new empty <code>BeanMap</code>.
@@ -464,7 +465,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
         if (readInvokers.containsKey(name)) {
             invoker = readInvokers.get(name);
         } else {
-            invoker = getInvoker(HandleType.GET, name);
+            invoker = getInvoker(readHandleType.get(name), name);
             readInvokers.put(name, invoker);
         }
         return invoker;
@@ -495,7 +496,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
                 try {
                     final String m = type.name().toLowerCase() + StringUtils.capitalize(name);
                     final MethodType methodType;
-                    if (type == HandleType.GET) {
+                    if (type == HandleType.GET || type == HandleType.IS) {
                         methodType = MethodType.methodType(types.get(name));
                     } else {
                         methodType = MethodType.methodType(void.class, types.get(name));
@@ -545,10 +546,20 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
             for (Class clazz : classes) {
                 for (Method m : clazz.getMethods()) {
                     String name = m.getName();
-                    if (name.startsWith(HandleType.GET.name().toLowerCase()) && !name.equals("getClass")) {
-                        name = transformPropertyName(StringUtils.uncapitalize(name.substring(3)));
-                        if (StringUtils.isNotBlank(name)) {
-                            types.put(name, m.getReturnType());
+                    Class rtype = m.getReturnType();
+                    if (void.class != rtype && !name.equals("getClass")) {
+                        boolean getType = name.startsWith(HandleType.GET.name().toLowerCase());
+                        boolean isType = false;
+                        if (!getType) {
+                            isType = name.startsWith(HandleType.IS.name().toLowerCase())
+                                    && (Boolean.class.isAssignableFrom(rtype) || rtype == boolean.class);
+                        }
+                        if (getType || isType) {
+                            String fn = transformPropertyName(StringUtils.uncapitalize(name.substring(isType ? 2 : 3)));
+                            if (StringUtils.isNotBlank(fn)) {
+                                types.put(fn, rtype);
+                                readHandleType.put(fn, isType ? HandleType.IS : HandleType.GET);
+                            }
                         }
                     }
                 }
@@ -585,7 +596,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     }
 
     private enum HandleType {
-        GET, SET
+        GET, IS, SET
     }
 
     /**
@@ -638,8 +649,8 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     private class MethodHandleInvoker extends BeanInvoker {
         private MethodHandle handle;
 
-        public MethodHandleInvoker(String methodName, MethodHandle handle) {
-            super(methodName, BeanMap.this.bean);
+        public MethodHandleInvoker(String propertyName, MethodHandle handle) {
+            super(propertyName, BeanMap.this.bean);
             this.handle = handle;
         }
 
