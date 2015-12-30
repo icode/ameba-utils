@@ -1,5 +1,10 @@
 package ameba.util;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -8,7 +13,30 @@ import java.util.regex.Pattern;
  * @since 13-8-17 下午7:46
  */
 public class LinkedProperties extends Properties {
-    private Map<Object, Object> linkMap = new LinkedHashMap<Object, Object>();
+    private Map<Object, Object> linkMap = new LinkedHashMap<>();
+
+    public static LinkedProperties create() {
+        return new LinkedProperties();
+    }
+
+    public static LinkedProperties create(String... resources) {
+        LinkedProperties properties = create();
+        if (resources != null) {
+            for (String res : resources) {
+                if (StringUtils.isNotBlank(res)) {
+                    Enumeration<URL> enumeration = IOUtils.getResources(res);
+                    while (enumeration.hasMoreElements()) {
+                        try (InputStream in = enumeration.nextElement().openStream()) {
+                            properties.load(in);
+                        } catch (IOException e) {
+                            // no op
+                        }
+                    }
+                }
+            }
+        }
+        return properties;
+    }
 
     @Override
     public String getProperty(String key) {
@@ -46,7 +74,7 @@ public class LinkedProperties extends Properties {
                     if (append) {
                         value = v + "," + value;
                     } else {
-                        value = ((String) v).replaceAll(Pattern.quote((String) value), "").replaceAll(",{2,}",",");
+                        value = ((String) v).replaceAll(Pattern.quote((String) value), "").replaceAll(",{2,}", ",");
                     }
                 } else if (remove) {
                     key = null;

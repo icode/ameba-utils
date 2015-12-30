@@ -7,6 +7,9 @@ import java.net.JarURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -234,5 +237,21 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
                 return null;
             }
         return null;
+    }
+
+    public static void write(InputStream in, Path path) {
+        write(in, path, StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public static void write(InputStream in, File file) {
+        write(in, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public static void write(InputStream in, Path path, StandardCopyOption op) {
+        try {
+            Files.copy(in, path, op);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
