@@ -22,7 +22,7 @@ import java.util.Date;
 
 /**
  * A builder for generating a CAPTCHA image/answer pair.
- * <p/>
+ * <br>
  * <p>
  * Example for generating a new CAPTCHA:
  * </p>
@@ -42,7 +42,7 @@ import java.util.Date;
  * <p>Adding multiple backgrounds has no affect; the last background added will simply be the
  * one that is eventually rendered.</p>
  * <p>To validate that <code>answerStr</code> is a correct answer to the CAPTCHA:</p>
- * <p/>
+ * <br>
  * <code>captcha.isCorrect(answerStr);</code>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
@@ -110,6 +110,8 @@ public final class Captcha implements Serializable {
 
         /**
          * Add a background using the default {@link BackgroundProducer} (a {@link TransparentBackgroundProducer}).
+         *
+         * @return builder
          */
         public Builder addBackground() {
             return addBackground(new TransparentBackgroundProducer());
@@ -118,7 +120,8 @@ public final class Captcha implements Serializable {
         /**
          * Add a background using the given {@link BackgroundProducer}.
          *
-         * @param bgProd
+         * @param bgProd bgProd
+         * @return builder
          */
         public Builder addBackground(BackgroundProducer bgProd) {
             _bg = bgProd.getBackground(_img.getWidth(), _img.getHeight());
@@ -128,6 +131,8 @@ public final class Captcha implements Serializable {
 
         /**
          * Generate the answer to the CAPTCHA using the {@link DefaultTextProducer}.
+         *
+         * @return Builder
          */
         public Builder addText() {
             return addText(new DefaultTextProducer());
@@ -137,7 +142,8 @@ public final class Captcha implements Serializable {
          * Generate the answer to the CAPTCHA using the given
          * {@link TextProducer}.
          *
-         * @param txtProd
+         * @param txtProd txtProd
+         * @return Builder
          */
         public Builder addText(TextProducer txtProd) {
             return addText(txtProd, new DefaultWordRenderer());
@@ -148,7 +154,8 @@ public final class Captcha implements Serializable {
          * {@link TextProducer}, and render it to the image using the given
          * {@link WordRenderer}.
          *
-         * @param wRenderer
+         * @param wRenderer wRenderer
+         * @return Builder
          */
         public Builder addText(WordRenderer wRenderer) {
             return addText(new DefaultTextProducer(), wRenderer);
@@ -159,8 +166,9 @@ public final class Captcha implements Serializable {
          * {@link TextProducer}, and render it to the image using the given
          * {@link WordRenderer}.
          *
-         * @param txtProd
-         * @param wRenderer
+         * @param txtProd   txtProd
+         * @param wRenderer wRenderer
+         * @return Builder
          */
         public Builder addText(TextProducer txtProd, WordRenderer wRenderer) {
             _answer += txtProd.getText();
@@ -171,6 +179,8 @@ public final class Captcha implements Serializable {
 
         /**
          * Add noise using the default {@link NoiseProducer} (a {@link CurvedLineNoiseProducer}).
+         *
+         * @return Builder
          */
         public Builder addNoise() {
             return this.addNoise(new CurvedLineNoiseProducer());
@@ -179,7 +189,8 @@ public final class Captcha implements Serializable {
         /**
          * Add noise using the given NoiseProducer.
          *
-         * @param nProd
+         * @param nProd nProd
+         * @return Builder
          */
         public Builder addNoise(NoiseProducer nProd) {
             nProd.makeNoise(_img);
@@ -188,6 +199,8 @@ public final class Captcha implements Serializable {
 
         /**
          * Gimp the image using the default {@link GimpyRenderer} (a {@link RippleGimpyRenderer}).
+         *
+         * @return Builder
          */
         public Builder gimp() {
             return gimp(new RippleGimpyRenderer());
@@ -196,7 +209,8 @@ public final class Captcha implements Serializable {
         /**
          * Gimp the image using the given {@link GimpyRenderer}.
          *
-         * @param gimpy
+         * @param gimpy gimpy
+         * @return Builder
          */
         public Builder gimp(GimpyRenderer gimpy) {
             gimpy.gimp(_img);
@@ -205,6 +219,8 @@ public final class Captcha implements Serializable {
 
         /**
          * Draw a single-pixel wide black border around the image.
+         *
+         * @return Builder
          */
         public Builder addBorder() {
             _addBorder = true;

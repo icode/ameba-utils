@@ -15,7 +15,7 @@ import java.util.Random;
  * <code>restaurant.wav</code>, and <code>swimming.wav</code>. This can be
  * overridden by passing the location of your own sound files to the
  * constructor, e.g.:
- * <p/>
+ * <br>
  * <pre>
  * String myFiles = { &quot;/mysounds/noise1.wav&quot;, &quot;/mysounds/noise2.wav&quot; };
  * NoiseProducer myNp = new RandomNoiseProducer(myFiles);

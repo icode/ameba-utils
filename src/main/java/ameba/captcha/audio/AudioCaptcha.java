@@ -14,11 +14,11 @@ import java.util.Random;
 
 /**
  * A builder for generating a CAPTCHA audio/answer pair.
- * <p/>
+ * <br>
  * <p>
  * Example for generating a new CAPTCHA:
  * </p>
- * <p/>
+ * <br>
  * <pre>
  * AudioCaptcha ac = new AudioCaptcha.Builder()
  *   .addAnswer()

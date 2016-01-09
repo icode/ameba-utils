@@ -76,26 +76,26 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
     /**
      * Clone this bean map using the following process:
-     * <p/>
+     * <br>
      * <ul>
      * <li>If there is no underlying bean, return a cloned BeanMap without a
      * bean.
-     * <p/>
+     * <br>
      * <li>Since there is an underlying bean, try to instantiate a new bean of
      * the same type using Class.newInstance().
-     * <p/>
+     * <br>
      * <li>If the instantiation fails, throw a CloneNotSupportedException
-     * <p/>
+     * <br>
      * <li>Clone the bean map and set the newly instantiated bean as the
      * underlying bean for the bean map.
-     * <p/>
+     * <br>
      * <li>Copy each property that is both readable and writable from the
      * existing object to a cloned bean map.
-     * <p/>
+     * <br>
      * <li>If anything fails along the way, throw a
      * CloneNotSupportedException.
-     * <p/>
-     * <ul>
+     * <br>
+     * </ul>
      *
      * @return a cloned instance of this bean map
      * @throws CloneNotSupportedException if the underlying bean
@@ -186,11 +186,11 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
     /**
      * Returns true if the bean defines a property with the given name.
-     * <p/>
+     * <br>
      * The given name must be a <code>String</code>; if not, this method
      * returns false. This method will also return false if the bean
      * does not define a property with that name.
-     * <p/>
+     * <br>
      * Write-only properties will not be matched as the test operates against
      * property read methods.
      *
@@ -206,13 +206,13 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
     /**
      * Returns the value of the bean's property with the given name.
-     * <p/>
+     * <br>
      * The given name must be a {@link String} and must not be
      * null; otherwise, this method returns <code>null</code>.
      * If the bean defines a property with the given name, the value of
      * that property is returned.  Otherwise, <code>null</code> is
      * returned.
-     * <p/>
+     * <br>
      * Write-only properties will not be matched as the test operates against
      * property read methods.
      *
@@ -306,7 +306,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
     /**
      * Get the keys for this BeanMap.
-     * <p/>
+     * <br>
      * Write-only properties are <b>not</b> included in the returned set of
      * property names, although it is possible to set their value and to get
      * their type.
@@ -321,7 +321,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
     /**
      * Gets a Set of MapEntry objects that are the mappings for this BeanMap.
-     * <p/>
+     * <br>
      * Each MapEntry can be set but not removed.
      *
      * @return the unmodifiable set of mappings
@@ -373,7 +373,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
     /**
      * Convenience method for getting an iterator over the keys.
-     * <p/>
+     * <br>
      * Write-only properties will not be returned in the iterator.
      *
      * @return an iterator over the keys

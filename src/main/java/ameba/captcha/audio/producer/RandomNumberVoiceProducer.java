@@ -56,13 +56,13 @@ public class RandomNumberVoiceProducer implements VoiceProducer {
      * Creates a <code>RandomNumberVoiceProducer</code> for the given
      * <code>voices</code>, a map of numbers to their corresponding filenames.
      * Conceptually the map must look like the following:
-     * <p/>
+     * <br>
      * <pre>
-     * {1 => ["/my_sounds/1-quiet.wav", "/my_sounds/1-loud.wav"],
-     *  2 => ["/my_sounds/2-quiet.wav", "/my_sounds/2-loud.wav"]}
+     * {1 =&gt; ["/my_sounds/1-quiet.wav", "/my_sounds/1-loud.wav"],
+     *  2 =&gt; ["/my_sounds/2-quiet.wav", "/my_sounds/2-loud.wav"]}
      * </pre>
      *
-     * @param voices
+     * @param voices voices
      */
     public RandomNumberVoiceProducer(Map<Integer, String[]> voices) {
         _voices = voices;

@@ -156,7 +156,7 @@ public class Images {
      *
      * @param image The image file
      * @return The base64 encoded value
-     * @throws IOException
+     * @throws IOException IOException
      */
     public static String toBase64(File image) throws IOException {
         return "data:" + MimeType.getByFilename(image.getName()) + ";base64," + BaseEncoding.base64().encode(IOUtils.toByteArray(image));
@@ -164,6 +164,10 @@ public class Images {
 
     /**
      * Create a captche image
+     *
+     * @param width  width
+     * @param height height
+     * @return Captcha
      */
     public static Captcha captcha(int width, int height) {
         return new Captcha(width, height);
@@ -171,6 +175,8 @@ public class Images {
 
     /**
      * Create a 150x150 captcha image
+     *
+     * @return Captcha
      */
     public static Captcha captcha() {
         return captcha(150, 50);
@@ -205,6 +211,8 @@ public class Images {
 
         /**
          * Tell the captche to draw a text and retrieve it
+         *
+         * @return this text
          */
         public String getText() {
             return getText(6);
@@ -212,6 +220,9 @@ public class Images {
 
         /**
          * Tell the captche to draw a text using the specified color (ex. #000000) and retrieve it
+         *
+         * @param color color
+         * @return this text
          */
         public String getText(String color) {
             this.textColor.add(Color.decode(color));
@@ -220,6 +231,9 @@ public class Images {
 
         /**
          * Tell the captche to draw a text of the specified size and retrieve it
+         *
+         * @param length length
+         * @return this text
          */
         public String getText(int length) {
             return getText(length, "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789");
@@ -227,6 +241,10 @@ public class Images {
 
         /**
          * Tell the captche to draw a text of the specified size using the specified color (ex. #000000) and retrieve it
+         *
+         * @param color  color
+         * @param length length
+         * @return this text
          */
         public String getText(String color, int length) {
             this.textColor.add(Color.decode(color));
@@ -262,6 +280,8 @@ public class Images {
 
         /**
          * Add noise to the captcha.
+         *
+         * @return this Captcha
          */
         public Captcha addNoise() {
             return addNoise(Color.BLACK);
@@ -277,6 +297,9 @@ public class Images {
 
         /**
          * Add noise to the captcha.
+         *
+         * @param color color
+         * @return this Captcha
          */
         public Captcha addNoise(String color) {
             return addNoise(Color.decode(color));
@@ -284,6 +307,10 @@ public class Images {
 
         /**
          * Set a gradient background.
+         *
+         * @param from from
+         * @param to   to
+         * @return this Captcha
          */
         public Captcha setBackground(String from, String to) {
             GradiatedBackgroundProducer bg = new GradiatedBackgroundProducer();
@@ -295,6 +322,9 @@ public class Images {
 
         /**
          * Set a solid background.
+         *
+         * @param color color
+         * @return this Captcha
          */
         public Captcha setBackground(String color) {
             background = new FlatColorBackgroundProducer(Color.decode(color));
@@ -303,6 +333,8 @@ public class Images {
 
         /**
          * Set a squiggles background
+         *
+         * @return this Captcha
          */
         public Captcha setSquigglesBackground() {
             background = new SquigglesBackgroundProducer();

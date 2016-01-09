@@ -18,7 +18,7 @@ import java.io.InputStream;
  * <li>Signed: true</li>
  * <li>Big Endian: false</li>
  * </ul>
- * <p/>
+ * <br>
  * <p>
  * Data files in other formats will cause an
  * <code>IllegalArgumentException</code> to be thrown.
@@ -58,6 +58,8 @@ public class Sample {
      * used by {@link AudioInputStream}. Typically this will be used with
      * a {@link Sample} that has been modified from its original.
      *
+     * @param sample      sample
+     * @param sampleCount sampleCount
      * @return A byte[] representing a sample
      * @see <a href="http://en.wiktionary.org/wiki/yak_shaving">Yak Shaving</a>
      */
@@ -123,11 +125,12 @@ public class Sample {
      * <code>getSampleCount()</code>, and the number of samples must not be so
      * large that the associated byte array cannot be allocated
      *
-     * @param begin
-     * @param end
-     * @param samples
-     * @throws IOException
-     * @throws IllegalArgumentException
+     * @param begin begin
+     * @param end end
+     * @param samples samples
+     * @throws IOException IOException
+     * @throws IllegalArgumentException IllegalArgumentException
+     * @return samples bytes
      */
     public double[] getInterleavedSamples(long begin, long end, double[] samples)
             throws IOException, IllegalArgumentException {
@@ -152,9 +155,9 @@ public class Sample {
      * Extract samples of a particular channel from interleavedSamples and copy
      * them into channelSamples
      *
-     * @param channel
-     * @param interleavedSamples
-     * @param channelSamples
+     * @param channel channel
+     * @param interleavedSamples interleavedSamples
+     * @param channelSamples channelSamples
      */
     public void getChannelSamples(int channel, double[] interleavedSamples,
                                   double[] channelSamples) {
@@ -168,9 +171,9 @@ public class Sample {
      * Convenience method. Extract left and right channels for common stereo
      * files. leftSamples and rightSamples must be of size getSampleCount()
      *
-     * @param leftSamples
-     * @param rightSamples
-     * @throws IOException
+     * @param leftSamples leftSamples
+     * @param rightSamples rightSamples
+     * @throws IOException IOException
      */
     public void getStereoSamples(double[] leftSamples, double[] rightSamples)
             throws IOException {

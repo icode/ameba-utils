@@ -43,8 +43,8 @@ public class DefaultWordRenderer implements WordRenderer {
      * Build a <code>WordRenderer</code> using the given <code>Color</code>s and
      * <code>Font</code>s.
      *
-     * @param colors
-     * @param fonts
+     * @param colors colors
+     * @param fonts fonts
      */
     public DefaultWordRenderer(List<Color> colors, List<Font> fonts) {
         _colors.addAll(colors);

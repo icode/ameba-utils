@@ -11,7 +11,7 @@ public class SampleUtil {
      * Get a file resource and return it as an InputStream. Intended primarily
      * to read in binary files which are contained in a jar.
      *
-     * @param filename
+     * @param filename filename
      * @return An @{link InputStream} to the file
      */
     public static InputStream readResource(String filename) {
