@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Result {
     private boolean success;
-    private Integer code;
+    private Long code;
     private String message;
     private String description;
     private List<Error> errors;
@@ -24,14 +24,14 @@ public class Result {
         this.errors = errors;
     }
 
-    public Result(Integer code, String message, List<Error> errors) {
+    public Result(Long code, String message, List<Error> errors) {
         this.success = false;
         this.code = code;
         this.message = message;
         this.errors = errors;
     }
 
-    public Result(Integer code, String message, String description, List<Error> errors) {
+    public Result(Long code, String message, String description, List<Error> errors) {
         this.success = false;
         this.code = code;
         this.message = message;
@@ -39,12 +39,20 @@ public class Result {
         this.errors = errors;
     }
 
+    public Result(int code, String message, List<Error> errors) {
+        this((long) code, message, errors);
+    }
+
+    public Result(int code, String message, String description, List<Error> errors) {
+        this((long) code, message, description, errors);
+    }
+
     public Result(boolean success, String message) {
         this.success = success;
         this.message = message;
     }
 
-    public Result(boolean success, Integer code, String message) {
+    public Result(boolean success, Long code, String message) {
         this.success = success;
         this.message = message;
         this.code = code;
@@ -66,6 +74,10 @@ public class Result {
     }
 
     public static Result success(int code, String message) {
+        return new Result(true, (long) code, message);
+    }
+
+    public static Result success(long code, String message) {
         return new Result(true, code, message);
     }
 
@@ -82,6 +94,10 @@ public class Result {
     }
 
     public static Result failure(int code, String message) {
+        return new Result(false, (long) code, message);
+    }
+
+    public static Result failure(long code, String message) {
         return new Result(false, code, message);
     }
 
@@ -105,84 +121,6 @@ public class Result {
         return new Result(message, description, errors);
     }
 
-    public static class Error {
-        private Integer code;
-        private String message;
-        private String description;
-        private String source;
-
-        public Error(String message) {
-            this.message = message;
-        }
-
-        public Error(String source, String message) {
-            this.message = message;
-            this.source = source;
-        }
-
-        public Error(Integer code, String message) {
-            this.code = code;
-            this.message = message;
-        }
-
-        public Error(String source, String message, Integer code) {
-            this.source = source;
-            this.message = message;
-            this.code = code;
-        }
-
-        public Error(Integer code, String message, String description) {
-            this.code = code;
-            this.message = message;
-            this.description = description;
-        }
-
-        public Error(String message, String description, String source) {
-            this.message = message;
-            this.description = description;
-            this.source = source;
-        }
-
-        public Error(Integer code, String message, String description, String source) {
-            this.code = code;
-            this.message = message;
-            this.description = description;
-            this.source = source;
-        }
-
-        public Integer getCode() {
-            return code;
-        }
-
-        public void setCode(Integer code) {
-            this.code = code;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getSource() {
-            return source;
-        }
-
-        public void setSource(String source) {
-            this.source = source;
-        }
-    }
-
     public boolean isSuccess() {
         return success;
     }
@@ -191,11 +129,11 @@ public class Result {
         this.success = success;
     }
 
-    public Integer getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 
@@ -230,5 +168,83 @@ public class Result {
         }
         errors.add(error);
         success = false;
+    }
+
+    public static class Error {
+        private Long code;
+        private String message;
+        private String description;
+        private String source;
+
+        public Error(String message) {
+            this.message = message;
+        }
+
+        public Error(String source, String message) {
+            this.message = message;
+            this.source = source;
+        }
+
+        public Error(Long code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public Error(String source, String message, Long code) {
+            this.source = source;
+            this.message = message;
+            this.code = code;
+        }
+
+        public Error(Long code, String message, String description) {
+            this.code = code;
+            this.message = message;
+            this.description = description;
+        }
+
+        public Error(String message, String description, String source) {
+            this.message = message;
+            this.description = description;
+            this.source = source;
+        }
+
+        public Error(Long code, String message, String description, String source) {
+            this.code = code;
+            this.message = message;
+            this.description = description;
+            this.source = source;
+        }
+
+        public Long getCode() {
+            return code;
+        }
+
+        public void setCode(Long code) {
+            this.code = code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getSource() {
+            return source;
+        }
+
+        public void setSource(String source) {
+            this.source = source;
+        }
     }
 }
