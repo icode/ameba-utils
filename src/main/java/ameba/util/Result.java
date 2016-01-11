@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Result {
     private boolean success;
-    private Long code;
+    private String code;
     private String message;
     private String description;
     private List<Error> errors;
@@ -41,26 +41,12 @@ public class Result {
     /**
      * <p>Constructor for Result.</p>
      *
-     * @param code a {@link java.lang.Long} object.
-     * @param message a {@link java.lang.String} object.
-     * @param errors a {@link java.util.List} object.
-     */
-    public Result(Long code, String message, List<Error> errors) {
-        this.success = false;
-        this.code = code;
-        this.message = message;
-        this.errors = errors;
-    }
-
-    /**
-     * <p>Constructor for Result.</p>
-     *
-     * @param code a {@link java.lang.Long} object.
+     * @param code a {@link java.lang.String} object.
      * @param message a {@link java.lang.String} object.
      * @param description a {@link java.lang.String} object.
      * @param errors a {@link java.util.List} object.
      */
-    public Result(Long code, String message, String description, List<Error> errors) {
+    public Result(String code, String message, String description, List<Error> errors) {
         this.success = false;
         this.code = code;
         this.message = message;
@@ -72,23 +58,23 @@ public class Result {
      * <p>Constructor for Result.</p>
      *
      * @param code a int.
-     * @param message a {@link java.lang.String} object.
+     * @param message a int object.
      * @param errors a {@link java.util.List} object.
      */
     public Result(int code, String message, List<Error> errors) {
-        this((long) code, message, errors);
+        this(String.valueOf(code), message, errors);
     }
 
     /**
      * <p>Constructor for Result.</p>
      *
      * @param code a int.
-     * @param message a {@link java.lang.String} object.
+     * @param message a int object.
      * @param description a {@link java.lang.String} object.
      * @param errors a {@link java.util.List} object.
      */
     public Result(int code, String message, String description, List<Error> errors) {
-        this((long) code, message, description, errors);
+        this(String.valueOf(code), message, description, errors);
     }
 
     /**
@@ -106,10 +92,10 @@ public class Result {
      * <p>Constructor for Result.</p>
      *
      * @param success a boolean.
-     * @param code a {@link java.lang.Long} object.
+     * @param code a {@link java.lang.String} object.
      * @param message a {@link java.lang.String} object.
      */
-    public Result(boolean success, Long code, String message) {
+    public Result(boolean success, String code, String message) {
         this.success = success;
         this.message = message;
         this.code = code;
@@ -156,18 +142,22 @@ public class Result {
      * @return a {@link ameba.util.Result} object.
      */
     public static Result success(int code, String message) {
-        return new Result(true, (long) code, message);
+        return new Result(true, String.valueOf(code), message);
     }
 
     /**
      * <p>success.</p>
      *
-     * @param code a long.
+     * @param code a String.
      * @param message a {@link java.lang.String} object.
      * @return a {@link ameba.util.Result} object.
      */
+    public static Result success(String code, String message) {
+        return new Result(true, String.valueOf(code), message);
+    }
+
     public static Result success(long code, String message) {
-        return new Result(true, code, message);
+        return new Result(true, String.valueOf(code), message);
     }
 
     /**
@@ -208,7 +198,7 @@ public class Result {
      * @return a {@link ameba.util.Result} object.
      */
     public static Result failure(int code, String message) {
-        return new Result(false, (long) code, message);
+        return new Result(false, String.valueOf(code), message);
     }
 
     /**
@@ -219,7 +209,7 @@ public class Result {
      * @return a {@link ameba.util.Result} object.
      */
     public static Result failure(long code, String message) {
-        return new Result(false, code, message);
+        return new Result(false, String.valueOf(code), message);
     }
 
     /**
@@ -232,6 +222,14 @@ public class Result {
      */
     public static Result failure(int code, String message, String description) {
         return new Result(code, message, description, null);
+    }
+
+    public static Result failure(String code, String message, String description) {
+        return new Result(code, message, description, null);
+    }
+
+    public static Result failure(long code, String message, String description) {
+        return new Result(String.valueOf(code), message, description, null);
     }
 
     /**
@@ -257,6 +255,14 @@ public class Result {
      */
     public static Result failure(int code, String message, String description, List<Error> errors) {
         return new Result(code, message, description, errors);
+    }
+
+    public static Result failure(String code, String message, String description, List<Error> errors) {
+        return new Result(code, message, description, errors);
+    }
+
+    public static Result failure(long code, String message, String description, List<Error> errors) {
+        return new Result(String.valueOf(code), message, description, errors);
     }
 
     /**
@@ -303,18 +309,18 @@ public class Result {
     /**
      * <p>Getter for the field <code>code</code>.</p>
      *
-     * @return a {@link java.lang.Long} object.
+     * @return a {@link java.lang.String} object.
      */
-    public Long getCode() {
+    public String getCode() {
         return code;
     }
 
     /**
      * <p>Setter for the field <code>code</code>.</p>
      *
-     * @param code a {@link java.lang.Long} object.
+     * @param code a {@link java.lang.String} object.
      */
-    public void setCode(Long code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -387,7 +393,7 @@ public class Result {
     }
 
     public static class Error {
-        private Long code;
+        private String code;
         private String message;
         private String description;
         private String source;
@@ -396,46 +402,29 @@ public class Result {
             this.message = message;
         }
 
-        public Error(String source, String message) {
-            this.message = message;
-            this.source = source;
-        }
-
-        public Error(Long code, String message) {
+        public Error(String code, String message) {
             this.code = code;
             this.message = message;
         }
 
-        public Error(String source, String message, Long code) {
-            this.source = source;
-            this.message = message;
-            this.code = code;
-        }
-
-        public Error(Long code, String message, String description) {
+        public Error(String code, String message, String description) {
             this.code = code;
             this.message = message;
             this.description = description;
         }
 
-        public Error(String message, String description, String source) {
-            this.message = message;
-            this.description = description;
-            this.source = source;
-        }
-
-        public Error(Long code, String message, String description, String source) {
+        public Error(String code, String message, String description, String source) {
             this.code = code;
             this.message = message;
             this.description = description;
             this.source = source;
         }
 
-        public Long getCode() {
+        public String getCode() {
             return code;
         }
 
-        public void setCode(Long code) {
+        public void setCode(String code) {
             this.code = code;
         }
 
