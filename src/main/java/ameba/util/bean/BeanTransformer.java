@@ -30,7 +30,7 @@ public abstract class BeanTransformer<T> {
             if (clazz.isArray()) {
                 return _transform((Object[]) obj);
             } else if (obj instanceof Map) {
-                return _transform((List) obj);
+                return _transform((Map) obj);
             } else if (obj instanceof List) {
                 return _transform((List) obj);
             } else if (obj instanceof Set) {
