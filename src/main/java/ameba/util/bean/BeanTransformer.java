@@ -29,6 +29,8 @@ public abstract class BeanTransformer<T> {
             Class clazz = obj.getClass();
             if (clazz.isArray()) {
                 return _transform((Object[]) obj);
+            } else if (obj instanceof Map) {
+                return _transform((List) obj);
             } else if (obj instanceof List) {
                 return _transform((List) obj);
             } else if (obj instanceof Set) {
@@ -94,4 +96,8 @@ public abstract class BeanTransformer<T> {
         return new BeanListIterator(listIterator, this);
     }
 
+    @SuppressWarnings("unchecked")
+    protected BeanMap _transform(final Map map) {
+        return new BeanMap<>(map);
+    }
 }
