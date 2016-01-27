@@ -572,8 +572,8 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
                 beanClass = (Class<T>) bean.getClass();
                 bean = (T) ((BeanMap) bean).getBean();
             } else {
-                Set<Entry> entries = ((Map) getBean()).entrySet();
-                for (Entry entry : entries) {
+                Set<Map.Entry> entries = ((Map) getBean()).entrySet();
+                for (Map.Entry entry : entries) {
                     String name = transformPropertyName((String) entry.getKey());
                     if (StringUtils.isNotBlank(name) && entry.getValue() != null) {
                         types.put(name, entry.getValue().getClass());
