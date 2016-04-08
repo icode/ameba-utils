@@ -65,9 +65,20 @@ public class MimeType {
      * <code>null</code>
      */
     public static String getByFilename(String fileName) {
+        return getByFilename(fileName, null);
+    }
+
+    /**
+     * @param fileName    the filename
+     * @param defaultType default Type
+     * @return the content type associated with <code>extension</code> of the
+     * given filename or if no associate is found, returns
+     * <code>defaultType</code>
+     */
+    public static String getByFilename(String fileName, String defaultType) {
         String extn = getExtension(fileName);
         if (extn != null) {
-            return get(extn);
+            return get(extn, defaultType);
         } else {
             // no extension, no content type
             return null;
