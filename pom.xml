@@ -6,7 +6,7 @@
 
     <groupId>org.amebastack</groupId>
     <artifactId>ameba-utils</artifactId>
-    <version>0.1.9-SNAPSHOT</version>
+    <version>0.1.9</version>
     <name>Ameba-Framework-Utils</name>
     <description>A useful Java framework utils!</description>
 
@@ -51,6 +51,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -188,7 +189,7 @@
 
     <properties>
         <commons.io.version>2.4</commons.io.version>
-        <joda-time.version>2.9.3</joda-time.version>
+        <joda-time.version>2.9.4</joda-time.version>
         <akka.version>2.3.11</akka.version>
         <javassist.version>3.20.0-GA</javassist.version>
         <commons.lang3.version>3.4</commons.lang3.version>
