@@ -7,12 +7,14 @@ import java.net.JarURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 import java.util.jar.Manifest;
 
 /**
@@ -370,5 +372,9 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<String> readLines(final InputStream input) throws IOException {
+        return readLines(input, Charset.defaultCharset());
     }
 }

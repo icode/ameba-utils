@@ -1,8 +1,12 @@
 package ameba.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.nio.charset.Charset;
+import java.util.List;
 
 /**
  * <p>FileUtils class.</p>
@@ -66,6 +70,10 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
      */
     public static String byteCountToDisplaySize(long size) {
         return byteCountToDisplaySize(BigInteger.valueOf(size), DEFAULT_MAXCHARS);
+    }
+
+    public static List<String> readLines(final File file) throws IOException {
+        return readLines(file, Charset.defaultCharset());
     }
 
     enum SizeSuffix {
