@@ -37,7 +37,7 @@ public class UnsafeByteArrayInputStream extends InputStream {
     /**
      * <p>Constructor for UnsafeByteArrayInputStream.</p>
      *
-     * @param buf an array of byte.
+     * @param buf    an array of byte.
      * @param offset a int.
      * @param length a int.
      */

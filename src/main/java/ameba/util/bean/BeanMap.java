@@ -288,10 +288,10 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     /**
      * <p>set.</p>
      *
-     * @param name a {@link java.lang.String} object.
+     * @param name  a {@link java.lang.String} object.
      * @param value a {@link java.lang.Object} object.
      * @throws java.lang.IllegalArgumentException if any.
-     * @throws java.lang.ClassCastException if any.
+     * @throws java.lang.ClassCastException       if any.
      */
     public void set(String name, Object value) throws IllegalArgumentException, ClassCastException {
         if (bean != null) {

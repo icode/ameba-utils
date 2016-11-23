@@ -19,7 +19,9 @@ public class TransparentBackgroundProducer implements BackgroundProducer {
         return getBackground(image.getWidth(), image.getHeight());
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BufferedImage getBackground(int width, int height) {
         BufferedImage bg = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);

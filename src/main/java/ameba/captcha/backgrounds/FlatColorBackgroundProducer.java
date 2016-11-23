@@ -40,7 +40,9 @@ public final class FlatColorBackgroundProducer implements BackgroundProducer {
         return this.getBackground(width, height);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BufferedImage getBackground(int width, int height) {
         BufferedImage img = new BufferedImage(width, height,

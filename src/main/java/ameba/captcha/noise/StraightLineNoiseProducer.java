@@ -34,7 +34,9 @@ public class StraightLineNoiseProducer implements NoiseProducer {
         _thickness = thickness;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void makeNoise(BufferedImage image) {
         Graphics2D graphics = image.createGraphics();

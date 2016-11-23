@@ -22,7 +22,9 @@ public class SquigglesBackgroundProducer implements BackgroundProducer {
         return getBackground(width, height);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BufferedImage getBackground(int width, int height) {
         BufferedImage result = new BufferedImage(width, height,

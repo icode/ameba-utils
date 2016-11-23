@@ -340,7 +340,7 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
     /**
      * <p>write.</p>
      *
-     * @param in a {@link java.io.InputStream} object.
+     * @param in   a {@link java.io.InputStream} object.
      * @param path a {@link java.nio.file.Path} object.
      */
     public static void write(InputStream in, Path path) {

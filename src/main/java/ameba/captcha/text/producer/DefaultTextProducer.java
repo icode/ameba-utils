@@ -45,7 +45,9 @@ public class DefaultTextProducer implements TextProducer {
         return copy;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getText() {
         String capText = "";

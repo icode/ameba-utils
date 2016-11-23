@@ -37,7 +37,9 @@ public class BeanSet<T> extends AbstractSet {
         this.beanTransformer = BeanTransformer.DEFAULT;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator iterator() {
         return beanTransformer._transform(set.iterator());

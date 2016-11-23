@@ -34,7 +34,9 @@ public class BeanList<T> extends AbstractList {
         this.beanTransformer = BeanTransformer.DEFAULT;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object get(int index) {
         return beanTransformer.transform(list.get(index));

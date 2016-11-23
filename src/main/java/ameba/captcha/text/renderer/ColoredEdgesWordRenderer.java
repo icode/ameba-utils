@@ -59,8 +59,8 @@ public class ColoredEdgesWordRenderer implements WordRenderer {
     /**
      * <p>Constructor for ColoredEdgesWordRenderer.</p>
      *
-     * @param colors a {@link java.util.List} object.
-     * @param fonts a {@link java.util.List} object.
+     * @param colors      a {@link java.util.List} object.
+     * @param fonts       a {@link java.util.List} object.
      * @param strokeWidth a float.
      */
     public ColoredEdgesWordRenderer(List<Color> colors, List<Font> fonts, float strokeWidth) {

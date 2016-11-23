@@ -98,7 +98,9 @@ public final class Captcha implements Serializable {
         return new Date(_builder._timeStamp.getTime());
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return _builder.toString();

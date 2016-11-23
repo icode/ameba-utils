@@ -35,7 +35,9 @@ public class BeanCollection<T> extends AbstractCollection {
         this.beanTransformer = BeanTransformer.DEFAULT;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator iterator() {
         return beanTransformer._transform(collection.iterator());

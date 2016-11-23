@@ -90,7 +90,9 @@ public class BeanListIterator<T> extends BeanIterator<T> implements ListIterator
         iterator.remove();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public void set(Object o) {
         ((ListIterator<T>)iterator).set((T) o);
     }

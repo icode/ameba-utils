@@ -62,7 +62,9 @@ public class LinkedProperties extends Properties {
         return ((sval == null) && (defaults != null)) ? defaults.getProperty(key) : sval;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Enumeration<?> propertyNames() {
         return Collections.enumeration(linkMap.keySet());

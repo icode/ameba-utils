@@ -75,7 +75,9 @@ public final class AudioCaptcha {
         return _builder._challenge;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return _builder.toString();

@@ -49,7 +49,7 @@ public class Cookies {
     /**
      * <p>newHttpOnlyCookie.</p>
      *
-     * @param name a {@link java.lang.String} object.
+     * @param name  a {@link java.lang.String} object.
      * @param value a {@link java.lang.String} object.
      * @return a {@link javax.ws.rs.core.NewCookie} object.
      */

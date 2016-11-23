@@ -33,7 +33,9 @@ public class BeanIterator<T> implements Iterator {
         this.beanTransformer = BeanTransformer.DEFAULT;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasNext() {
         return iterator.hasNext();

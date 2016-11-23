@@ -21,7 +21,9 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
      * Constant <code>CLASS_EXTENSION=".class"</code>
      */
     public static final String CLASS_EXTENSION = ".class";
-    /** Constant <code>JAVA_EXTENSION=".java"</code> */
+    /**
+     * Constant <code>JAVA_EXTENSION=".java"</code>
+     */
     public static final String JAVA_EXTENSION = ".java";
 
     /**

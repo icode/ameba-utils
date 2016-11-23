@@ -35,7 +35,9 @@ public class DropShadowGimpyRenderer implements GimpyRenderer {
         _opacity = opacity;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void gimp(BufferedImage image) {
         ShadowFilter sFilter = new ShadowFilter();

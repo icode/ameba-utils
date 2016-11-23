@@ -34,7 +34,9 @@ public class BeanIterable<T> implements Iterable {
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator iterator() {
         return beanTransformer._transform(iterable.iterator());

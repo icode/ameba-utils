@@ -217,7 +217,7 @@ public class Sample {
     /**
      * <p>decodeBytes.</p>
      *
-     * @param audioBytes an array of byte.
+     * @param audioBytes   an array of byte.
      * @param audioSamples an array of double.
      */
     public void decodeBytes(byte[] audioBytes, double[] audioSamples) {

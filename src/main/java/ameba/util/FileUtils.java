@@ -61,7 +61,9 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
         return byteCountToDisplaySize(BigInteger.valueOf(size), maxChars);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public static String byteCountToDisplaySize(long size) {
         return byteCountToDisplaySize(BigInteger.valueOf(size), DEFAULT_MAXCHARS);
     }

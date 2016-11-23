@@ -35,7 +35,9 @@ public class GradiatedBackgroundProducer implements BackgroundProducer {
         _toColor = to;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BufferedImage getBackground(int width, int height) {
         // create an opaque image
