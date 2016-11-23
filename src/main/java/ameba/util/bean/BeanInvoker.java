@@ -4,7 +4,7 @@ package ameba.util.bean;
  * <p>Abstract BeanInvoker class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public abstract class BeanInvoker {
 

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * Adds a dark drop-shadow.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class DropShadowGimpyRenderer implements GimpyRenderer {
     private static final int DEFAULT_RADIUS = 3;

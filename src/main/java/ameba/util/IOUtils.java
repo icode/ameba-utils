@@ -20,7 +20,7 @@ import java.util.jar.Manifest;
  *
  * @author ICode
  * @since 13-8-14 下午7:33
- * @version $Id: $Id
+ * request
  */
 public class IOUtils extends org.apache.commons.io.IOUtils {
 

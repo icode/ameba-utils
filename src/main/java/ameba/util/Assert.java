@@ -35,7 +35,7 @@ import java.util.Map;
  * @author Colin Sampaleanu
  * @author Rob Harrop
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public abstract class Assert {
 

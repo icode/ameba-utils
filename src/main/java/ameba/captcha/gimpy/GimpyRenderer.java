@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  * <p>GimpyRenderer interface.</p>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public interface GimpyRenderer {
     /**

@@ -7,13 +7,14 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * <p>LinkedProperties class.</p>
  *
  * @author ICode
  * @since 13-8-17 下午7:46
- * @version $Id: $Id
+ * request
  */
 public class LinkedProperties extends Properties {
     private Map<Object, Object> linkMap = new LinkedHashMap<>();
@@ -73,13 +74,7 @@ public class LinkedProperties extends Properties {
     /** {@inheritDoc} */
     @Override
     public Set<String> stringPropertyNames() {
-        Set<String> set = new LinkedHashSet<String>();
-
-        for (Object key : linkMap.keySet()) {
-            set.add((String) key);
-        }
-
-        return set;
+        return linkMap.keySet().stream().map(key -> (String) key).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /** {@inheritDoc} */

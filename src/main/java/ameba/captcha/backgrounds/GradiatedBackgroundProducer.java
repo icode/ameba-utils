@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  * respectively.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class GradiatedBackgroundProducer implements BackgroundProducer {
 

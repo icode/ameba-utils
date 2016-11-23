@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * <p>SquigglesBackgroundProducer class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class SquigglesBackgroundProducer implements BackgroundProducer {
 

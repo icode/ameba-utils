@@ -9,7 +9,7 @@ import java.io.InputStream;
  * <p>SampleUtil class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class SampleUtil {
 

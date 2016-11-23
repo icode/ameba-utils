@@ -4,7 +4,7 @@ package ameba.captcha.text.producer;
  * <p>ArabicTextProducer class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class ArabicTextProducer implements TextProducer {
     static final int DEFAULT_LENGTH = 5;

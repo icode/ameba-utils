@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
  * Overlays a warped grid to the image.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class FishEyeGimpyRenderer implements GimpyRenderer {
     private final Color _hColor;

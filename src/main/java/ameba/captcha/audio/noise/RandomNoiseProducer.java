@@ -22,7 +22,7 @@ import java.util.Random;
  * </pre>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class RandomNoiseProducer implements NoiseProducer {
 
@@ -71,7 +71,7 @@ public class RandomNoiseProducer implements NoiseProducer {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("[Noise files: ");
         sb.append(_noiseFiles);
         sb.append("]");

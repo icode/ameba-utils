@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  * tall but do not affect the width).
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class StretchGimpyRenderer implements GimpyRenderer {
 

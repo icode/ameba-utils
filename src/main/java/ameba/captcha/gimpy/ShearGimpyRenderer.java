@@ -9,7 +9,7 @@ import java.util.Random;
  * <p>ShearGimpyRenderer class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class ShearGimpyRenderer implements GimpyRenderer {
 

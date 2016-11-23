@@ -14,7 +14,7 @@ import java.util.Map;
  * <p>ClassUtils class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
     /**
@@ -76,11 +76,7 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
     public static <T> T newInstance(String name) {
         try {
             return (T) getClass(name).newInstance();
-        } catch (InstantiationException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        } catch (IllegalAccessException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        } catch (ClassNotFoundException e) {
+        } catch (InstantiationException | ClassNotFoundException | IllegalAccessException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -102,13 +98,7 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         try {
             Constructor<T> constructor = clazz.<T>getConstructor(argsClass);
             return constructor.newInstance(args);
-        } catch (InstantiationException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        } catch (IllegalAccessException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        } catch (NoSuchMethodException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        } catch (InvocationTargetException e) {
+        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -136,11 +126,7 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         try {
             Method m = getPublicMethod(instance.getClass(), method, getArgsClasses(args));
             return (T) m.invoke(instance, args);
-        } catch (NoSuchMethodException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        } catch (InvocationTargetException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }

@@ -8,7 +8,7 @@ import java.util.Iterator;
  * <p>BeanCollection class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class BeanCollection<T> extends AbstractCollection {
     protected final Collection<T> collection;

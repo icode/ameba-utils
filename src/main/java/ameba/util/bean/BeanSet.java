@@ -9,7 +9,7 @@ import java.util.Set;
  * <p>BeanSet class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class BeanSet<T> extends AbstractSet {
 

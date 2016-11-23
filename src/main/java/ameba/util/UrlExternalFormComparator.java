@@ -8,7 +8,7 @@ import java.util.Comparator;
  * <p>UrlExternalFormComparator class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class UrlExternalFormComparator implements Comparator<URL>, Serializable
 {

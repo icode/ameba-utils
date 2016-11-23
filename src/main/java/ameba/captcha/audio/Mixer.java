@@ -12,7 +12,7 @@ import static ameba.captcha.audio.Sample.SC_AUDIO_FORMAT;
  * Helper class for operating on audio {@link ameba.captcha.audio.Sample}s.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class Mixer {
     /**

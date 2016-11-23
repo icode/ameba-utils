@@ -8,7 +8,7 @@ import java.util.List;
  * <p>Result class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class Result {
     private boolean success;

@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
  * <p>UnsafeByteArrayOutputStream class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class UnsafeByteArrayOutputStream extends OutputStream {
 

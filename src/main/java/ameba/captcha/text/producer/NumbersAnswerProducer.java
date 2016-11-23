@@ -5,7 +5,7 @@ package ameba.captcha.text.producer;
  * TextProducer implementation that will return a series of numbers.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class NumbersAnswerProducer implements TextProducer {
 

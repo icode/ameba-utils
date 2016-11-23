@@ -23,7 +23,7 @@ import java.util.Random;
  * Images utils
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class Images {
 

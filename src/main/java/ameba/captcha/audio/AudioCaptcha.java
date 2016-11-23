@@ -31,7 +31,7 @@ import java.util.Random;
  * </p>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public final class AudioCaptcha {
 
@@ -91,8 +91,8 @@ public final class AudioCaptcha {
         private List<NoiseProducer> _noiseProds;
 
         public Builder() {
-            _voiceProds = new ArrayList<VoiceProducer>();
-            _noiseProds = new ArrayList<NoiseProducer>();
+            _voiceProds = new ArrayList<>();
+            _noiseProds = new ArrayList<>();
         }
 
         public Builder addAnswer() {
@@ -138,13 +138,13 @@ public final class AudioCaptcha {
 
             // Make a List of Samples for each character
             VoiceProducer vProd;
-            List<Sample> samples = new ArrayList<Sample>();
+            List<Sample> samples = new ArrayList<>();
             Sample sample;
-            for (int i = 0; i < ansAry.length; i++) {
+            for (char anAnsAry : ansAry) {
                 // Create Sample for this character from one of the
                 // VoiceProducers
                 vProd = _voiceProds.get(RAND.nextInt(_voiceProds.size()));
-                sample = vProd.getVocalization(ansAry[i]);
+                sample = vProd.getVocalization(anAnsAry);
                 samples.add(sample);
             }
 
@@ -164,7 +164,7 @@ public final class AudioCaptcha {
 
         @Override
         public String toString() {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append("[Answer: ");
             sb.append(_answer);
             sb.append("]");

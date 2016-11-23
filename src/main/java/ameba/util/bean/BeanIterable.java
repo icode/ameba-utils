@@ -6,7 +6,7 @@ import java.util.Iterator;
  * <p>BeanIterable class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class BeanIterable<T> implements Iterable {
     protected final Iterable<T> iterable;

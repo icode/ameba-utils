@@ -6,7 +6,7 @@ import java.util.ListIterator;
  * <p>BeanListIterator class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class BeanListIterator<T> extends BeanIterator<T> implements ListIterator {
 

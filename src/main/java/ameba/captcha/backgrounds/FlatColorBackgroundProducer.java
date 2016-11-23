@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * <p>FlatColorBackgroundProducer class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public final class FlatColorBackgroundProducer implements BackgroundProducer {
 

@@ -7,7 +7,7 @@ import java.io.InputStream;
  * <p>UnsafeByteArrayInputStream class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class UnsafeByteArrayInputStream extends InputStream {
 

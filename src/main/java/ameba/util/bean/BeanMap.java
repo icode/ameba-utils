@@ -15,7 +15,7 @@ import java.util.*;
  * <p>BeanMap class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable {
 
@@ -146,11 +146,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
             // copy only properties that are readable and writable.  If its
             // not readable, we can't get the value from the old map.  If
             // its not writable, we can't write a value into the new map.
-            for (String key : types.keySet()) {
-                if (getReadInvoker(key) != null) {
-                    newMap.put(key, get(key));
-                }
-            }
+            types.keySet().stream().filter(key -> getReadInvoker(key) != null).forEach(key -> newMap.put(key, get(key)));
         } catch (Exception exception) {
             throw new CloneNotSupportedException
                     ("Unable to copy bean values to cloned bean map: " +
@@ -167,11 +163,7 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      * @param map the BeanMap whose properties to put
      */
     public void putAllWriteable(BeanMap<T> map) {
-        for (String key : map.types.keySet()) {
-            if (getWriteInvoker(key) != null) {
-                this.put(key, map.get(key));
-            }
-        }
+        map.types.keySet().stream().filter(key -> getWriteInvoker(key) != null).forEach(key -> this.put(key, map.get(key)));
     }
 
 

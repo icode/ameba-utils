@@ -6,7 +6,7 @@ import java.util.*;
  * <p>BeanList class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class BeanList<T> extends AbstractList {
 

@@ -8,7 +8,7 @@ import java.util.*;
  * <p>Abstract BeanTransformer class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public abstract class BeanTransformer<T> {
 

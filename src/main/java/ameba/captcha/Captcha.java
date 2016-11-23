@@ -46,7 +46,7 @@ import java.util.Date;
  * <code>captcha.isCorrect(answerStr);</code>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public final class Captcha implements Serializable {
 
@@ -287,7 +287,7 @@ public final class Captcha implements Serializable {
 
         @Override
         public String toString() {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append("[Answer: ");
             sb.append(_answer);
             sb.append("][Timestamp: ");

@@ -7,7 +7,7 @@ import java.util.Map;
  * <p>MimeType class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class MimeType {
     private final static Map<String, String> contentTypes = new HashMap<>();

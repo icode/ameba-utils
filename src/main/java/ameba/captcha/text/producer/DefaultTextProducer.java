@@ -7,7 +7,7 @@ import java.util.Random;
  * Produces text of a given length from a given array of characters.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class DefaultTextProducer implements TextProducer {
 

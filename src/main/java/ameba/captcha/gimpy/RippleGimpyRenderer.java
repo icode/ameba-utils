@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * <p>RippleGimpyRenderer class.</p>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class RippleGimpyRenderer implements GimpyRenderer {
 

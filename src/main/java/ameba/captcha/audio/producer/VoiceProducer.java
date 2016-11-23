@@ -6,7 +6,7 @@ import ameba.captcha.audio.Sample;
  * Generates a vocalization for a single character.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public interface VoiceProducer {
     /**

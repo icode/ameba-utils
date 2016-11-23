@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * <p>Times class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class Times {
     static Pattern days = Pattern.compile("^([0-9]+)d$");

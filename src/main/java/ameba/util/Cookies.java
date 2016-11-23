@@ -8,7 +8,7 @@ import javax.ws.rs.core.NewCookie;
  *
  * @author ICode
  * @since 13-8-21 上午7:48
- * @version $Id: $Id
+ * request
  */
 public class Cookies {
 

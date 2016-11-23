@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  * Render the answer for the CAPTCHA onto the image.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public interface WordRenderer {
 

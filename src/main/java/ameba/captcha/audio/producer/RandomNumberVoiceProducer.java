@@ -19,7 +19,7 @@ import java.util.Random;
  * </p>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
- * @version $Id: $Id
+ * request
  */
 public class RandomNumberVoiceProducer implements VoiceProducer {
 
@@ -29,7 +29,7 @@ public class RandomNumberVoiceProducer implements VoiceProducer {
     private static final Map<Integer, String[]> DEFAULT_VOICES_MAP;
 
     static {
-        DEFAULT_VOICES_MAP = new HashMap<Integer, String[]>();
+        DEFAULT_VOICES_MAP = new HashMap<>();
         String[] files_for_num;
         StringBuilder sb;
 

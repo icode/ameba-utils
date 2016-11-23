@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * <p>BlockGimpyRenderer class.</p>
  *
  * @author icode
- * @version $Id: $Id
+ * request
  */
 public class BlockGimpyRenderer implements GimpyRenderer {
 
