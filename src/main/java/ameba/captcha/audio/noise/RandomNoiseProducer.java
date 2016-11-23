@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Adds noise to a {@link Sample} from one of the given <code>noiseFiles</code>.
+ * Adds noise to a {@link ameba.captcha.audio.Sample} from one of the given <code>noiseFiles</code>.
  * By default this noise comes from one of three files, all located in
  * <code>/sounds/noises/</code>: <code>radio_tuning.wav</code>,
  * <code>restaurant.wav</code>, and <code>swimming.wav</code>. This can be
@@ -22,6 +22,7 @@ import java.util.Random;
  * </pre>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class RandomNoiseProducer implements NoiseProducer {
 
@@ -33,15 +34,25 @@ public class RandomNoiseProducer implements NoiseProducer {
 
     private final String _noiseFiles[];
 
+    /**
+     * <p>Constructor for RandomNoiseProducer.</p>
+     */
     public RandomNoiseProducer() {
         this(DEFAULT_NOISES);
     }
 
+    /**
+     * <p>Constructor for RandomNoiseProducer.</p>
+     *
+     * @param noiseFiles an array of {@link java.lang.String} objects.
+     */
     public RandomNoiseProducer(String[] noiseFiles) {
         _noiseFiles = noiseFiles;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Append the given <code>samples</code> to each other, then add random
      * noise to the result.
      */
@@ -55,6 +66,9 @@ public class RandomNoiseProducer implements NoiseProducer {
         return Mixer.mix(appended, 1.0, noise, 0.6);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();

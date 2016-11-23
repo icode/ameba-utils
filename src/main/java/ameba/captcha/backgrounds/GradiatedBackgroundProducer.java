@@ -10,21 +10,32 @@ import java.awt.image.BufferedImage;
  * respectively.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class GradiatedBackgroundProducer implements BackgroundProducer {
 
     private Color _fromColor = Color.DARK_GRAY;
     private Color _toColor = Color.WHITE;
 
+    /**
+     * <p>Constructor for GradiatedBackgroundProducer.</p>
+     */
     public GradiatedBackgroundProducer() {
         this(Color.DARK_GRAY, Color.WHITE);
     }
 
+    /**
+     * <p>Constructor for GradiatedBackgroundProducer.</p>
+     *
+     * @param from a {@link java.awt.Color} object.
+     * @param to   a {@link java.awt.Color} object.
+     */
     public GradiatedBackgroundProducer(Color from, Color to) {
         _fromColor = from;
         _toColor = to;
     }
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage getBackground(int width, int height) {
         // create an opaque image
@@ -53,6 +64,7 @@ public class GradiatedBackgroundProducer implements BackgroundProducer {
         return img;
     }
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage addBackground(BufferedImage image) {
         int width = image.getWidth();
@@ -61,10 +73,20 @@ public class GradiatedBackgroundProducer implements BackgroundProducer {
         return getBackground(width, height);
     }
 
+    /**
+     * <p>setFromColor.</p>
+     *
+     * @param fromColor a {@link java.awt.Color} object.
+     */
     public void setFromColor(Color fromColor) {
         _fromColor = fromColor;
     }
 
+    /**
+     * <p>setToColor.</p>
+     *
+     * @param toColor a {@link java.awt.Color} object.
+     */
     public void setToColor(Color toColor) {
         _toColor = toColor;
     }

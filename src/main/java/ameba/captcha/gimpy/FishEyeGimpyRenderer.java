@@ -7,20 +7,33 @@ import java.awt.image.BufferedImage;
  * Overlays a warped grid to the image.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class FishEyeGimpyRenderer implements GimpyRenderer {
     private final Color _hColor;
     private final Color _vColor;
 
+    /**
+     * <p>Constructor for FishEyeGimpyRenderer.</p>
+     */
     public FishEyeGimpyRenderer() {
         this(Color.BLACK, Color.BLACK);
     }
 
+    /**
+     * <p>Constructor for FishEyeGimpyRenderer.</p>
+     *
+     * @param hColor a {@link java.awt.Color} object.
+     * @param vColor a {@link java.awt.Color} object.
+     */
     public FishEyeGimpyRenderer(Color hColor, Color vColor) {
         _hColor = hColor;
         _vColor = vColor;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void gimp(BufferedImage image) {
         int height = image.getHeight();

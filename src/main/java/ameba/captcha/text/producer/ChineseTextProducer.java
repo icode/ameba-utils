@@ -4,6 +4,7 @@ package ameba.captcha.text.producer;
  * TextProducer implementation that will return Chinese characters.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class ChineseTextProducer implements TextProducer {
 
@@ -23,14 +24,25 @@ public class ChineseTextProducer implements TextProducer {
 
     private final TextProducer _txtProd;    // Decorator
 
+    /**
+     * <p>Constructor for ChineseTextProducer.</p>
+     */
     public ChineseTextProducer() {
         this(DEFAULT_LENGTH);
     }
 
+    /**
+     * <p>Constructor for ChineseTextProducer.</p>
+     *
+     * @param length a int.
+     */
     public ChineseTextProducer(int length) {
         _txtProd = new DefaultTextProducer(length, CHARS);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getText() {
         return _txtProd.getText();

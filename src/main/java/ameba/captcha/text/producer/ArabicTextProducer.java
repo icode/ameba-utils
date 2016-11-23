@@ -1,5 +1,11 @@
 package ameba.captcha.text.producer;
 
+/**
+ * <p>ArabicTextProducer class.</p>
+ *
+ * @author icode
+ * @version $Id: $Id
+ */
 public class ArabicTextProducer implements TextProducer {
     static final int DEFAULT_LENGTH = 5;
 
@@ -12,14 +18,25 @@ public class ArabicTextProducer implements TextProducer {
 
     private final TextProducer _txtProd;
 
+    /**
+     * <p>Constructor for ArabicTextProducer.</p>
+     */
     public ArabicTextProducer() {
         this(DEFAULT_LENGTH);
     }
 
+    /**
+     * <p>Constructor for ArabicTextProducer.</p>
+     *
+     * @param length a int.
+     */
     public ArabicTextProducer(int length) {
         _txtProd = new DefaultTextProducer(length, ARABIC_CHARS);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getText() {
         return new StringBuffer(_txtProd.getText()).reverse().toString();

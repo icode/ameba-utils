@@ -13,6 +13,7 @@ import java.util.Random;
  * Renders the answer onto the image.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class DefaultWordRenderer implements WordRenderer {
 
@@ -52,10 +53,9 @@ public class DefaultWordRenderer implements WordRenderer {
     }
 
     /**
-     * Render a word onto a BufferedImage.
+     * {@inheritDoc}
      *
-     * @param word  The word to be rendered.
-     * @param image The BufferedImage onto which the word will be painted.
+     * Render a word onto a BufferedImage.
      */
     @Override
     public void render(final String word, BufferedImage image) {

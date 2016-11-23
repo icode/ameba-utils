@@ -21,6 +21,9 @@ import java.util.Random;
 
 /**
  * Images utils
+ *
+ * @author icode
+ * @version $Id: $Id
  */
 public class Images {
 
@@ -156,7 +159,7 @@ public class Images {
      *
      * @param image The image file
      * @return The base64 encoded value
-     * @throws IOException IOException
+     * @throws java.io.IOException java.io.IOException
      */
     public static String toBase64(File image) throws IOException {
         return "data:" + MimeType.getByFilename(image.getName()) + ";base64," + BaseEncoding.base64().encode(IOUtils.toByteArray(image));

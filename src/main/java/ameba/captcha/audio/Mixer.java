@@ -9,11 +9,18 @@ import java.util.List;
 import static ameba.captcha.audio.Sample.SC_AUDIO_FORMAT;
 
 /**
- * Helper class for operating on audio {@link Sample}s.
+ * Helper class for operating on audio {@link ameba.captcha.audio.Sample}s.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class Mixer {
+    /**
+     * <p>append.</p>
+     *
+     * @param samples a {@link java.util.List} object.
+     * @return a {@link ameba.captcha.audio.Sample} object.
+     */
     public final static Sample append(List<Sample> samples) {
         if (samples.size() == 0) {
             return buildSample(0, new double[0]);
@@ -36,6 +43,15 @@ public class Mixer {
         return buildSample(sampleCount, appended);
     }
 
+    /**
+     * <p>mix.</p>
+     *
+     * @param sample1 a {@link ameba.captcha.audio.Sample} object.
+     * @param volAdj1 a double.
+     * @param sample2 a {@link ameba.captcha.audio.Sample} object.
+     * @param volAdj2 a double.
+     * @return a {@link ameba.captcha.audio.Sample} object.
+     */
     public final static Sample mix(Sample sample1, double volAdj1,
                                    Sample sample2, double volAdj2) {
         double[] s1_ary = sample1.getInterleavedSamples();

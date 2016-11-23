@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
  * tall but do not affect the width).
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class StretchGimpyRenderer implements GimpyRenderer {
 
@@ -19,15 +20,27 @@ public class StretchGimpyRenderer implements GimpyRenderer {
     private final double _xScale;
     private final double _yScale;
 
+    /**
+     * <p>Constructor for StretchGimpyRenderer.</p>
+     */
     public StretchGimpyRenderer() {
         this(XDEFAULT, YDEFAULT);
     }
 
+    /**
+     * <p>Constructor for StretchGimpyRenderer.</p>
+     *
+     * @param xScale a double.
+     * @param yScale a double.
+     */
     public StretchGimpyRenderer(double xScale, double yScale) {
         _xScale = xScale;
         _yScale = yScale;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void gimp(BufferedImage image) {
         Graphics2D g = image.createGraphics();

@@ -4,18 +4,35 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p>FlatColorBackgroundProducer class.</p>
+ *
+ * @author icode
+ * @version $Id: $Id
+ */
 public final class FlatColorBackgroundProducer implements BackgroundProducer {
 
     private Color _color = Color.GRAY;
 
+    /**
+     * <p>Constructor for FlatColorBackgroundProducer.</p>
+     */
     public FlatColorBackgroundProducer() {
         this(Color.GRAY);
     }
 
+    /**
+     * <p>Constructor for FlatColorBackgroundProducer.</p>
+     *
+     * @param color a {@link java.awt.Color} object.
+     */
     public FlatColorBackgroundProducer(Color color) {
         _color = color;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BufferedImage addBackground(BufferedImage bi) {
         int width = bi.getWidth();
@@ -23,6 +40,7 @@ public final class FlatColorBackgroundProducer implements BackgroundProducer {
         return this.getBackground(width, height);
     }
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage getBackground(int width, int height) {
         BufferedImage img = new BufferedImage(width, height,

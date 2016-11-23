@@ -5,19 +5,36 @@ import java.awt.image.BufferedImage;
 import java.security.SecureRandom;
 import java.util.Random;
 
+/**
+ * <p>ShearGimpyRenderer class.</p>
+ *
+ * @author icode
+ * @version $Id: $Id
+ */
 public class ShearGimpyRenderer implements GimpyRenderer {
 
     private static final Random RAND = new SecureRandom();
     private final Color _color;
 
+    /**
+     * <p>Constructor for ShearGimpyRenderer.</p>
+     */
     public ShearGimpyRenderer() {
         this(Color.GRAY);
     }
 
+    /**
+     * <p>Constructor for ShearGimpyRenderer.</p>
+     *
+     * @param color a {@link java.awt.Color} object.
+     */
     public ShearGimpyRenderer(Color color) {
         _color = color;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void gimp(BufferedImage bi) {
         Graphics2D g = bi.createGraphics();

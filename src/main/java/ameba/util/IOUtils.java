@@ -16,13 +16,22 @@ import java.util.Iterator;
 import java.util.jar.Manifest;
 
 /**
+ * <p>IOUtils class.</p>
+ *
  * @author ICode
  * @since 13-8-14 下午7:33
+ * @version $Id: $Id
  */
 public class IOUtils extends org.apache.commons.io.IOUtils {
 
     private static final int DEFAULT_BUFFER_SIZE = 4096;
 
+    /**
+     * <p>toByteArray.</p>
+     *
+     * @param file a {@link java.io.File} object.
+     * @return an array of byte.
+     */
     public static byte[] toByteArray(File file) {
         FileInputStream is = null;
         try {
@@ -35,6 +44,12 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         }
     }
 
+    /**
+     * <p>getResourceAsStream.</p>
+     *
+     * @param resource a {@link java.lang.String} object.
+     * @return a {@link java.io.InputStream} object.
+     */
     public static InputStream getResourceAsStream(String resource) {
         InputStream in = ClassUtils.getContextClassLoader().getResourceAsStream(resource);
         if (in == null) {
@@ -44,6 +59,12 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return in;
     }
 
+    /**
+     * <p>getResources.</p>
+     *
+     * @param resource a {@link java.lang.String} object.
+     * @return a {@link java.util.Enumeration} object.
+     */
     public static Enumeration<URL> getResources(String resource) {
         Enumeration<URL> urls = null;
         try {
@@ -106,6 +127,12 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         } : urls;
     }
 
+    /**
+     * <p>getResource.</p>
+     *
+     * @param resource a {@link java.lang.String} object.
+     * @return a {@link java.net.URL} object.
+     */
     public static URL getResource(String resource) {
         URL url = ClassUtils.getContextClassLoader().getResource(resource);
         if (url == null) {
@@ -115,6 +142,12 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return url;
     }
 
+    /**
+     * <p>read.</p>
+     *
+     * @param in a {@link java.io.InputStream} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String read(InputStream in) {
         InputStreamReader reader;
         try {
@@ -125,6 +158,13 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return read(reader);
     }
 
+    /**
+     * <p>readFromResource.</p>
+     *
+     * @param resource a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     * @throws java.io.IOException if any.
+     */
     public static String readFromResource(String resource) throws IOException {
 
         InputStream in = getResourceAsStream(resource);
@@ -138,6 +178,13 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         }
     }
 
+    /**
+     * <p>readByteArrayFromResource.</p>
+     *
+     * @param resource a {@link java.lang.String} object.
+     * @return an array of byte.
+     * @throws java.io.IOException if any.
+     */
     public static byte[] readByteArrayFromResource(String resource) throws IOException {
         InputStream in = getResourceAsStream(resource);
         if (in == null) {
@@ -151,12 +198,25 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         }
     }
 
+    /**
+     * <p>readByteArray.</p>
+     *
+     * @param input a {@link java.io.InputStream} object.
+     * @return an array of byte.
+     * @throws java.io.IOException if any.
+     */
     public static byte[] readByteArray(InputStream input) throws IOException {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         copy(input, output);
         return output.toByteArray();
     }
 
+    /**
+     * <p>read.</p>
+     *
+     * @param reader a {@link java.io.Reader} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String read(Reader reader) {
         StringWriter writer = new StringWriter();
         try {
@@ -172,6 +232,13 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         }
     }
 
+    /**
+     * <p>read.</p>
+     *
+     * @param reader a {@link java.io.Reader} object.
+     * @param length a int.
+     * @return a {@link java.lang.String} object.
+     */
     public static String read(Reader reader, int length) {
         try {
             char[] buffer = new char[length];
@@ -194,6 +261,12 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         }
     }
 
+    /**
+     * <p>toString.</p>
+     *
+     * @param date a {@link java.util.Date} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String toString(java.util.Date date) {
         if (date == null) {
             return null;
@@ -202,6 +275,12 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return format.format(date);
     }
 
+    /**
+     * <p>getStackTrace.</p>
+     *
+     * @param ex a {@link java.lang.Throwable} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String getStackTrace(Throwable ex) {
         StringWriter buf = new StringWriter();
         ex.printStackTrace(new PrintWriter(buf));
@@ -209,6 +288,12 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return buf.toString();
     }
 
+    /**
+     * <p>toString.</p>
+     *
+     * @param stackTrace an array of {@link java.lang.StackTraceElement} objects.
+     * @return a {@link java.lang.String} object.
+     */
     public static String toString(StackTraceElement[] stackTrace) {
         StringBuilder buf = new StringBuilder();
         for (StackTraceElement item : stackTrace) {
@@ -218,10 +303,23 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return buf.toString();
     }
 
+    /**
+     * <p>getJarImplVersion.</p>
+     *
+     * @param clazz a {@link java.lang.Class} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String getJarImplVersion(Class clazz) {
         return getJarManifestValue(clazz, "Implementation-Version");
     }
 
+    /**
+     * <p>getJarManifestValue.</p>
+     *
+     * @param clazz    a {@link java.lang.Class} object.
+     * @param attrName a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String getJarManifestValue(Class clazz, String attrName) {
         URL url = getResource("/" + clazz.getName().replace('.', '/')
                 + ".class");
@@ -239,14 +337,33 @@ public class IOUtils extends org.apache.commons.io.IOUtils {
         return null;
     }
 
+    /**
+     * <p>write.</p>
+     *
+     * @param in a {@link java.io.InputStream} object.
+     * @param path a {@link java.nio.file.Path} object.
+     */
     public static void write(InputStream in, Path path) {
         write(in, path, StandardCopyOption.REPLACE_EXISTING);
     }
 
+    /**
+     * <p>write.</p>
+     *
+     * @param in a {@link java.io.InputStream} object.
+     * @param file a {@link java.io.File} object.
+     */
     public static void write(InputStream in, File file) {
         write(in, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
+    /**
+     * <p>write.</p>
+     *
+     * @param in a {@link java.io.InputStream} object.
+     * @param path a {@link java.nio.file.Path} object.
+     * @param op a {@link java.nio.file.StandardCopyOption} object.
+     */
     public static void write(InputStream in, Path path, StandardCopyOption op) {
         try {
             Files.copy(in, path, op);

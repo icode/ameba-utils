@@ -5,14 +5,17 @@ import com.jhlabs.image.RippleFilter;
 import java.awt.image.BufferedImage;
 
 /**
+ * <p>RippleGimpyRenderer class.</p>
+ *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class RippleGimpyRenderer implements GimpyRenderer {
 
     /**
-     * Apply a RippleFilter to the image.
+     * {@inheritDoc}
      *
-     * @param image The image to be distorted
+     * Apply a RippleFilter to the image.
      */
     @Override
     public void gimp(BufferedImage image) {

@@ -25,9 +25,13 @@ import java.io.InputStream;
  * </p>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class Sample {
 
+    /**
+     * Constant <code>SC_AUDIO_FORMAT</code>
+     */
     public static final AudioFormat SC_AUDIO_FORMAT = new AudioFormat(
             16000, // sample rate
             16, // sample size in bits
@@ -37,6 +41,11 @@ public class Sample {
 
     private final AudioInputStream _audioInputStream;
 
+    /**
+     * <p>Constructor for Sample.</p>
+     *
+     * @param is a {@link java.io.InputStream} object.
+     */
     public Sample(InputStream is) {
         if (is instanceof AudioInputStream) {
             _audioInputStream = (AudioInputStream) is;
@@ -55,10 +64,11 @@ public class Sample {
 
     /**
      * Helper method to convert a double[] to a byte[] in a format that can be
-     * used by {@link AudioInputStream}. Typically this will be used with
-     * a {@link Sample} that has been modified from its original.
+     * used by {@link javax.sound.sampled.AudioInputStream}. Typically this will be used with
+     * a {@link ameba.captcha.audio.Sample} that has been modified from its original.
      *
      * @param sample      sample
+     * @param sampleCount sampleCount
      * @param sampleCount sampleCount
      * @return A byte[] representing a sample
      * @see <a href="http://en.wiktionary.org/wiki/yak_shaving">Yak Shaving</a>
@@ -87,10 +97,20 @@ public class Sample {
         }
     }
 
+    /**
+     * <p>getAudioInputStream.</p>
+     *
+     * @return a {@link javax.sound.sampled.AudioInputStream} object.
+     */
     public AudioInputStream getAudioInputStream() {
         return _audioInputStream;
     }
 
+    /**
+     * <p>getFormat.</p>
+     *
+     * @return a {@link javax.sound.sampled.AudioFormat} object.
+     */
     public AudioFormat getFormat() {
         return _audioInputStream.getFormat();
     }
@@ -107,6 +127,11 @@ public class Sample {
         return total / getFormat().getChannels();
     }
 
+    /**
+     * <p>getInterleavedSamples.</p>
+     *
+     * @return an array of double.
+     */
     public double[] getInterleavedSamples() {
         double[] samples = new double[(int) getSampleCount()];
         try {
@@ -128,8 +153,8 @@ public class Sample {
      * @param begin begin
      * @param end end
      * @param samples samples
-     * @throws IOException IOException
-     * @throws IllegalArgumentException IllegalArgumentException
+     * @throws java.io.IOException java.io.IOException
+     * @throws java.lang.IllegalArgumentException java.lang.IllegalArgumentException
      * @return samples bytes
      */
     public double[] getInterleavedSamples(long begin, long end, double[] samples)
@@ -156,6 +181,7 @@ public class Sample {
      * them into channelSamples
      *
      * @param channel channel
+     * @param channelSamples channelSamples
      * @param interleavedSamples interleavedSamples
      * @param channelSamples channelSamples
      */
@@ -173,7 +199,7 @@ public class Sample {
      *
      * @param leftSamples leftSamples
      * @param rightSamples rightSamples
-     * @throws IOException IOException
+     * @throws java.io.IOException java.io.IOException
      */
     public void getStereoSamples(double[] leftSamples, double[] rightSamples)
             throws IOException {
@@ -187,6 +213,13 @@ public class Sample {
     }
 
     // Decode bytes of audioBytes into audioSamples
+
+    /**
+     * <p>decodeBytes.</p>
+     *
+     * @param audioBytes an array of byte.
+     * @param audioSamples an array of double.
+     */
     public void decodeBytes(byte[] audioBytes, double[] audioSamples) {
         int sampleSizeInBytes = getFormat().getSampleSizeInBits() / 8;
         int[] sampleBytes = new int[sampleSizeInBytes];
@@ -229,6 +262,7 @@ public class Sample {
         return asByteArray(getSampleCount(), getInterleavedSamples());
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[Sample] samples: " + getSampleCount() + ", format: "

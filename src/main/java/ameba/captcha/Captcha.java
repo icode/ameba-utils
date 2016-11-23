@@ -46,9 +46,13 @@ import java.util.Date;
  * <code>captcha.isCorrect(answerStr);</code>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public final class Captcha implements Serializable {
 
+    /**
+     * Constant <code>NAME="simpleCaptcha"</code>
+     */
     public static final String NAME = "simpleCaptcha";
     private static final long serialVersionUID = 617511236L;
     private Builder _builder;
@@ -57,10 +61,21 @@ public final class Captcha implements Serializable {
         _builder = builder;
     }
 
+    /**
+     * <p>isCorrect.</p>
+     *
+     * @param answer a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public boolean isCorrect(String answer) {
         return answer.equals(_builder._answer);
     }
 
+    /**
+     * <p>getAnswer.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getAnswer() {
         return _builder._answer;
     }
@@ -74,10 +89,16 @@ public final class Captcha implements Serializable {
         return _builder._img;
     }
 
+    /**
+     * <p>getTimeStamp.</p>
+     *
+     * @return a {@link java.util.Date} object.
+     */
     public Date getTimeStamp() {
         return new Date(_builder._timeStamp.getTime());
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return _builder.toString();

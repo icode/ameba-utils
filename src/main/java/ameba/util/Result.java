@@ -156,6 +156,13 @@ public class Result {
         return new Result(true, String.valueOf(code), message);
     }
 
+    /**
+     * <p>success.</p>
+     *
+     * @param code    a long.
+     * @param message a {@link java.lang.String} object.
+     * @return a {@link ameba.util.Result} object.
+     */
     public static Result success(long code, String message) {
         return new Result(true, String.valueOf(code), message);
     }
@@ -224,10 +231,26 @@ public class Result {
         return new Result(code, message, description, null);
     }
 
+    /**
+     * <p>failure.</p>
+     *
+     * @param code a {@link java.lang.String} object.
+     * @param message a {@link java.lang.String} object.
+     * @param description a {@link java.lang.String} object.
+     * @return a {@link ameba.util.Result} object.
+     */
     public static Result failure(String code, String message, String description) {
         return new Result(code, message, description, null);
     }
 
+    /**
+     * <p>failure.</p>
+     *
+     * @param code a long.
+     * @param message a {@link java.lang.String} object.
+     * @param description a {@link java.lang.String} object.
+     * @return a {@link ameba.util.Result} object.
+     */
     public static Result failure(long code, String message, String description) {
         return new Result(String.valueOf(code), message, description, null);
     }
@@ -257,10 +280,28 @@ public class Result {
         return new Result(code, message, description, errors);
     }
 
+    /**
+     * <p>failure.</p>
+     *
+     * @param code a {@link java.lang.String} object.
+     * @param message a {@link java.lang.String} object.
+     * @param description a {@link java.lang.String} object.
+     * @param errors a {@link java.util.List} object.
+     * @return a {@link ameba.util.Result} object.
+     */
     public static Result failure(String code, String message, String description, List<Error> errors) {
         return new Result(code, message, description, errors);
     }
 
+    /**
+     * <p>failure.</p>
+     *
+     * @param code a long.
+     * @param message a {@link java.lang.String} object.
+     * @param description a {@link java.lang.String} object.
+     * @param errors a {@link java.util.List} object.
+     * @return a {@link ameba.util.Result} object.
+     */
     public static Result failure(long code, String message, String description, List<Error> errors) {
         return new Result(String.valueOf(code), message, description, errors);
     }

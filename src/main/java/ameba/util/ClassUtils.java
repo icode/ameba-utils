@@ -11,12 +11,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <p>ClassUtils class.</p>
+ *
  * @author icode
+ * @version $Id: $Id
  */
 public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
+    /**
+     * Constant <code>CLASS_EXTENSION=".class"</code>
+     */
     public static final String CLASS_EXTENSION = ".class";
+    /** Constant <code>JAVA_EXTENSION=".java"</code> */
     public static final String JAVA_EXTENSION = ".java";
 
+    /**
+     * <p>getContextClassLoader.</p>
+     *
+     * @return a {@link java.lang.ClassLoader} object.
+     */
     public static ClassLoader getContextClassLoader() {
         ClassLoader loader = null;
         try {
@@ -29,6 +41,12 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         return loader;
     }
 
+    /**
+     * <p>getClasspathURLs.</p>
+     *
+     * @param loader a {@link java.lang.ClassLoader} object.
+     * @return a {@link java.util.List} object.
+     */
     public static List<URL> getClasspathURLs(ClassLoader loader) {
         List<URL> urls = Lists.newArrayList();
         if (loader != null) {
@@ -46,6 +64,13 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         return urls;
     }
 
+    /**
+     * <p>newInstance.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param <T> a T object.
+     * @return a T object.
+     */
     public static <T> T newInstance(String name) {
         try {
             return (T) getClass(name).newInstance();
@@ -58,6 +83,14 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         }
     }
 
+    /**
+     * <p>newInstance.</p>
+     *
+     * @param clazz a {@link java.lang.Class} object.
+     * @param args a {@link java.lang.Object} object.
+     * @param <T> a T object.
+     * @return a T object.
+     */
     public static <T> T newInstance(Class clazz, Object... args) {
 
         if (clazz == null) return null;
@@ -87,6 +120,15 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         return argsClass;
     }
 
+    /**
+     * <p>invoke.</p>
+     *
+     * @param instance a {@link java.lang.Object} object.
+     * @param method a {@link java.lang.String} object.
+     * @param args a {@link java.lang.Object} object.
+     * @param <T> a T object.
+     * @return a T object.
+     */
     public static <T> T invoke(Object instance, String method, Object... args) {
         if (instance == null) return null;
         try {
@@ -102,10 +144,23 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
     }
 
 
+    /**
+     * <p>getGenericClass.</p>
+     *
+     * @param cls a {@link java.lang.Class} object.
+     * @return a {@link java.lang.Class} object.
+     */
     public static Class<?> getGenericClass(Class<?> cls) {
         return getGenericClass(cls, 0);
     }
 
+    /**
+     * <p>getGenericClass.</p>
+     *
+     * @param cls a {@link java.lang.Class} object.
+     * @param i a int.
+     * @return a {@link java.lang.Class} object.
+     */
     public static Class<?> getGenericClass(Class<?> cls, int i) {
         try {
             ParameterizedType parameterizedType;
@@ -141,21 +196,45 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         }
     }
 
+    /**
+     * <p>getJavaVersion.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public static String getJavaVersion() {
         return System.getProperty("java.specification.version");
     }
 
+    /**
+     * <p>isBeforeJava5.</p>
+     *
+     * @param javaVersion a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public static boolean isBeforeJava5(String javaVersion) {
         return (StringUtils.isEmpty(javaVersion) || "1.0".equals(javaVersion)
                 || "1.1".equals(javaVersion) || "1.2".equals(javaVersion)
                 || "1.3".equals(javaVersion) || "1.4".equals(javaVersion));
     }
 
+    /**
+     * <p>isBeforeJava6.</p>
+     *
+     * @param javaVersion a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public static boolean isBeforeJava6(String javaVersion) {
         return isBeforeJava5(javaVersion) || "1.5".equals(javaVersion);
     }
 
 
+    /**
+     * <p>toString.</p>
+     *
+     * @param clazz a {@link java.lang.Class} object.
+     * @param method a {@link java.lang.reflect.Method} object.
+     * @return a {@link java.lang.String} object.
+     */
     public static String toString(Class clazz, Method method) {
         try {
             if (clazz == null) {
@@ -191,6 +270,14 @@ public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
         }
     }
 
+    /**
+     * <p>searchProperty.</p>
+     *
+     * @param leftParameter a {@link java.lang.Object} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link java.lang.Object} object.
+     * @throws java.lang.Exception if any.
+     */
     @SuppressWarnings("unchecked")
     public static Object searchProperty(Object leftParameter, String name) throws Exception {
         Class<?> leftClass = leftParameter.getClass();

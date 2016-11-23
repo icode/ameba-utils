@@ -5,9 +5,15 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 
 /**
+ * <p>FileUtils class.</p>
+ *
  * @author icode
+ * @version $Id: $Id
  */
 public class FileUtils extends org.apache.commons.io.FileUtils {
+    /**
+     * Constant <code>ONE_KB_BD</code>
+     */
     public static final BigDecimal ONE_KB_BD = new BigDecimal(1024L);
     private static final int DEFAULT_MAXCHARS = 3;
 
@@ -18,11 +24,9 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
      * Warning! it is not advised to use <code>maxChars &lt; 3</code> because it produces
      * correctly rounded, but non-intuitive results like "0 KB" for 100 bytes.
      *
-     * @param size
+     * @param size a {@link java.math.BigInteger} object.
      * @param maxChars maximum length of digit part, ie. '1.2'
      * @return rounded byte size as {@link java.lang.String}
-     * @see [https://issues.apache.org/jira/browse/IO-226] - should the rounding be changed?
-     * @see [https://issues.apache.org/jira/browse/IO-373]
      */
     public static String byteCountToDisplaySize(BigInteger size, int maxChars) {
         String displaySize;
@@ -49,14 +53,15 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
     /**
      * See {@link #byteCountToDisplaySize(BigInteger, int)}.
      *
-     * @param size
-     * @param maxChars
-     * @return
+     * @param size a long.
+     * @param maxChars a int.
+     * @return a {@link java.lang.String} object.
      */
     public static String byteCountToDisplaySize(long size, int maxChars) {
         return byteCountToDisplaySize(BigInteger.valueOf(size), maxChars);
     }
 
+    /** {@inheritDoc} */
     public static String byteCountToDisplaySize(long size) {
         return byteCountToDisplaySize(BigInteger.valueOf(size), DEFAULT_MAXCHARS);
     }

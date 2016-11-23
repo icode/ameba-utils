@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * <p>ColoredEdgesWordRenderer class.</p>
+ *
+ * @author icode
+ * @version $Id: $Id
+ */
 public class ColoredEdgesWordRenderer implements WordRenderer {
 
     private static final Random RAND = new SecureRandom();
@@ -33,20 +39,37 @@ public class ColoredEdgesWordRenderer implements WordRenderer {
     private final List<Color> _colors;
     private final float _strokeWidth;
 
+    /**
+     * <p>Constructor for ColoredEdgesWordRenderer.</p>
+     */
     public ColoredEdgesWordRenderer() {
         this(DEFAULT_COLORS, DEFAULT_FONTS, DEFAULT_STROKE_WIDTH);
     }
 
+    /**
+     * <p>Constructor for ColoredEdgesWordRenderer.</p>
+     *
+     * @param colors a {@link java.util.List} object.
+     * @param fonts  a {@link java.util.List} object.
+     */
     public ColoredEdgesWordRenderer(List<Color> colors, List<Font> fonts) {
         this(colors, fonts, DEFAULT_STROKE_WIDTH);
     }
 
+    /**
+     * <p>Constructor for ColoredEdgesWordRenderer.</p>
+     *
+     * @param colors a {@link java.util.List} object.
+     * @param fonts a {@link java.util.List} object.
+     * @param strokeWidth a float.
+     */
     public ColoredEdgesWordRenderer(List<Color> colors, List<Font> fonts, float strokeWidth) {
         _colors = colors != null ? colors : DEFAULT_COLORS;
         _fonts = fonts != null ? fonts : DEFAULT_FONTS;
         _strokeWidth = strokeWidth < 0 ? DEFAULT_STROKE_WIDTH : strokeWidth;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void render(final String word, BufferedImage image) {
         Graphics2D g = image.createGraphics();

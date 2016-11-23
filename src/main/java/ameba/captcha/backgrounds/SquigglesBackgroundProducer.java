@@ -4,8 +4,17 @@ import java.awt.*;
 import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p>SquigglesBackgroundProducer class.</p>
+ *
+ * @author icode
+ * @version $Id: $Id
+ */
 public class SquigglesBackgroundProducer implements BackgroundProducer {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BufferedImage addBackground(BufferedImage image) {
         int width = image.getWidth();
@@ -13,6 +22,7 @@ public class SquigglesBackgroundProducer implements BackgroundProducer {
         return getBackground(width, height);
     }
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage getBackground(int width, int height) {
         BufferedImage result = new BufferedImage(width, height,

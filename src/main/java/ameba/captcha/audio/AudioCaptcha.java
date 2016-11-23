@@ -31,9 +31,13 @@ import java.util.Random;
  * </p>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public final class AudioCaptcha {
 
+    /**
+     * Constant <code>NAME="audioCaptcha"</code>
+     */
     public static final String NAME = "audioCaptcha";
     private static final Random RAND = new SecureRandom();
 
@@ -43,18 +47,35 @@ public final class AudioCaptcha {
         _builder = builder;
     }
 
+    /**
+     * <p>isCorrect.</p>
+     *
+     * @param answer a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public boolean isCorrect(String answer) {
         return answer.equals(_builder._answer);
     }
 
+    /**
+     * <p>getAnswer.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getAnswer() {
         return _builder._answer;
     }
 
+    /**
+     * <p>getChallenge.</p>
+     *
+     * @return a {@link ameba.captcha.audio.Sample} object.
+     */
     public Sample getChallenge() {
         return _builder._challenge;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return _builder.toString();

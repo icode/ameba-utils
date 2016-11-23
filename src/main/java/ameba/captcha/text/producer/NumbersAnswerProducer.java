@@ -5,6 +5,7 @@ package ameba.captcha.text.producer;
  * TextProducer implementation that will return a series of numbers.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class NumbersAnswerProducer implements TextProducer {
 
@@ -14,14 +15,25 @@ public class NumbersAnswerProducer implements TextProducer {
 
     private final TextProducer _txtProd;
 
+    /**
+     * <p>Constructor for NumbersAnswerProducer.</p>
+     */
     public NumbersAnswerProducer() {
         this(DEFAULT_LENGTH);
     }
 
+    /**
+     * <p>Constructor for NumbersAnswerProducer.</p>
+     *
+     * @param length a int.
+     */
     public NumbersAnswerProducer(int length) {
         _txtProd = new DefaultTextProducer(length, NUMBERS);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getText() {
         return new StringBuffer(_txtProd.getText()).toString();

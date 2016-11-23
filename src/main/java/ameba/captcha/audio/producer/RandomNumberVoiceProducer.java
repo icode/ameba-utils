@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  * <p>
- * {@link VoiceProducer} which generates a vocalization for a given number,
+ * {@link ameba.captcha.audio.producer.VoiceProducer} which generates a vocalization for a given number,
  * randomly selecting from a list of voices. The default voices are located in
  * the jar in the <code>sounds/en/numbers</code> directory, and have filenames
  * with a format of <i>num</i>-<i>voice</i>.wav, e.g.:
@@ -19,6 +19,7 @@ import java.util.Random;
  * </p>
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class RandomNumberVoiceProducer implements VoiceProducer {
 
@@ -48,6 +49,9 @@ public class RandomNumberVoiceProducer implements VoiceProducer {
 
     private final Map<Integer, String[]> _voices;
 
+    /**
+     * <p>Constructor for RandomNumberVoiceProducer.</p>
+     */
     public RandomNumberVoiceProducer() {
         this(DEFAULT_VOICES_MAP);
     }
@@ -68,10 +72,18 @@ public class RandomNumberVoiceProducer implements VoiceProducer {
         _voices = voices;
     }
 
+    /**
+     * <p>getVoices.</p>
+     *
+     * @return a {@link java.util.Map} object.
+     */
     public Map<Integer, String[]> getVoices() {
         return Collections.unmodifiableMap(_voices);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Sample getVocalization(char num) {
         try {

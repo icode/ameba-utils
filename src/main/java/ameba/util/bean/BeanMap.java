@@ -12,7 +12,10 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
+ * <p>BeanMap class.</p>
+ *
  * @author icode
+ * @version $Id: $Id
  */
 public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable {
 
@@ -51,12 +54,23 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
         initialise();
     }
 
+    /**
+     * <p>Constructor for BeanMap.</p>
+     *
+     * @param bean            a T object.
+     * @param beanTransformer a {@link ameba.util.bean.BeanTransformer} object.
+     */
     public BeanMap(T bean, BeanTransformer beanTransformer) {
         this.transformer = beanTransformer;
         this.bean = bean;
         initialise();
     }
 
+    /**
+     * <p>getBeanName.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getBeanName() {
         return beanClass.getSimpleName();
     }
@@ -65,9 +79,9 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     //-------------------------------------------------------------------------
 
     /**
-     * Renders a string representation of this object.
+     * {@inheritDoc}
      *
-     * @return a <code>String</code> representation of this object
+     * Renders a string representation of this object.
      */
     @Override
     public String toString() {
@@ -75,6 +89,8 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Clone this bean map using the following process:
      * <br>
      * <ul>
@@ -96,10 +112,6 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      * CloneNotSupportedException.
      * <br>
      * </ul>
-     *
-     * @return a cloned instance of this bean map
-     * @throws CloneNotSupportedException if the underlying bean
-     *                                    cannot be cloned
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -164,6 +176,8 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
 
     /**
+     * {@inheritDoc}
+     *
      * This method reinitializes the bean map to have default values for the
      * bean's properties.  This is accomplished by constructing a new instance
      * of the bean which the map uses as its underlying data source.  This
@@ -185,6 +199,8 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns true if the bean defines a property with the given name.
      * <br>
      * The given name must be a <code>String</code>; if not, this method
@@ -193,11 +209,6 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      * <br>
      * Write-only properties will not be matched as the test operates against
      * property read methods.
-     *
-     * @param name the name of the property to check
-     * @return false if the given name is null or is not a <code>String</code>;
-     * false if the bean does not define a property with that name; or
-     * true if the bean does define a property with that name
      */
     @Override
     public boolean containsKey(Object name) {
@@ -205,6 +216,8 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns the value of the bean's property with the given name.
      * <br>
      * The given name must be a {@link String} and must not be
@@ -215,9 +228,6 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
      * <br>
      * Write-only properties will not be matched as the test operates against
      * property read methods.
-     *
-     * @param name the name of the property whose value to return
-     * @return the value of the property with that name
      */
     @Override
     public Object get(Object name) {
@@ -234,21 +244,21 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
         return null;
     }
 
+    /**
+     * <p>transform.</p>
+     *
+     * @param invoker a {@link ameba.util.bean.BeanInvoker} object.
+     * @return a {@link java.lang.Object} object.
+     * @throws java.lang.Throwable if any.
+     */
     protected Object transform(BeanInvoker invoker) throws Throwable {
         return transformer.transform(invoker.invoke());
     }
 
     /**
-     * Sets the bean property with the given name to the given value.
+     * {@inheritDoc}
      *
-     * @param name  the name of the property to set
-     * @param value the value to set that property to
-     * @return the previous value of that property
-     * @throws IllegalArgumentException if the given name is null;
-     *                                  if the given name is not a {@link String}; if the bean doesn't
-     *                                  define a property with that name; or if the bean property with
-     *                                  that name is read-only
-     * @throws ClassCastException       if an error occurs creating the method args
+     * Sets the bean property with the given name to the given value.
      */
     @Override
     public Object put(String name, Object value) throws IllegalArgumentException, ClassCastException {
@@ -275,6 +285,14 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
         return null;
     }
 
+    /**
+     * <p>set.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param value a {@link java.lang.Object} object.
+     * @throws java.lang.IllegalArgumentException if any.
+     * @throws java.lang.ClassCastException if any.
+     */
     public void set(String name, Object value) throws IllegalArgumentException, ClassCastException {
         if (bean != null) {
             BeanInvoker handle = getWriteInvoker(name);
@@ -294,9 +312,9 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     }
 
     /**
-     * Returns the number of properties defined by the bean.
+     * {@inheritDoc}
      *
-     * @return the number of properties defined by the bean
+     * Returns the number of properties defined by the bean.
      */
     @Override
     public int size() {
@@ -305,14 +323,13 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
 
 
     /**
+     * {@inheritDoc}
+     *
      * Get the keys for this BeanMap.
      * <br>
      * Write-only properties are <b>not</b> included in the returned set of
      * property names, although it is possible to set their value and to get
      * their type.
-     *
-     * @return BeanMap keys.  The Set returned by this method is not
-     * modifiable.
      */
     @Override
     public Set<String> keySet() {
@@ -320,11 +337,11 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Gets a Set of MapEntry objects that are the mappings for this BeanMap.
      * <br>
      * Each MapEntry can be set but not removed.
-     *
-     * @return the unmodifiable set of mappings
      */
     @Override
     public Set<Map.Entry<String, Object>> entrySet() {
@@ -342,10 +359,9 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
     }
 
     /**
-     * Returns the values for the BeanMap.
+     * {@inheritDoc}
      *
-     * @return values for the BeanMap.  The returned collection is not
-     * modifiable.
+     * Returns the values for the BeanMap.
      */
     @Override
     public Collection<Object> values() {
@@ -522,10 +538,19 @@ public class BeanMap<T> extends AbstractMap<String, Object> implements Cloneable
         initialise();
     }
 
+    /**
+     * <p>transformPropertyName.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     protected String transformPropertyName(String name) {
         return name;
     }
 
+    /**
+     * <p>initialise.</p>
+     */
     @SuppressWarnings("unchecked")
     protected void initialise() {
         if (getBean() == null) {

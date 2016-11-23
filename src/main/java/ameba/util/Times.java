@@ -5,7 +5,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * <p>Times class.</p>
+ *
  * @author icode
+ * @version $Id: $Id
  */
 public class Times {
     static Pattern days = Pattern.compile("^([0-9]+)d$");
@@ -47,6 +50,12 @@ public class Times {
         return toAdd;
     }
 
+    /**
+     * <p>toDuration.</p>
+     *
+     * @param time a long.
+     * @return a {@link java.lang.String} object.
+     */
     public static String toDuration(long time) {
         String duration = null;
         if (time >= 86400000) {

@@ -6,7 +6,7 @@
 
     <groupId>org.amebastack</groupId>
     <artifactId>ameba-utils</artifactId>
-    <version>0.1.10</version>
+    <version>0.1.11-SNAPSHOT</version>
     <name>Ameba-Framework-Utils</name>
     <description>A useful Java framework utils!</description>
 
@@ -141,18 +141,6 @@
             <artifactId>javassist</artifactId>
             <version>${javassist.version}</version>
         </dependency>
-        <!--akka-->
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.11</artifactId>
-            <version>${akka.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.jhlabs</groupId>
@@ -176,8 +164,8 @@
                 <version>2.5.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -189,11 +177,9 @@
 
     <properties>
         <commons.io.version>2.5</commons.io.version>
-        <joda-time.version>2.9.4</joda-time.version>
-        <akka.version>2.3.11</akka.version>
-        <javassist.version>3.20.0-GA</javassist.version>
+        <javassist.version>3.22.0-CR1</javassist.version>
         <commons.lang3.version>3.4</commons.lang3.version>
-        <guava.version>19.0</guava.version>
+        <guava.version>20.0</guava.version>
         <commons.collections.version>4.1</commons.collections.version>
         <jaxrs.api.version>2.0.1</jaxrs.api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

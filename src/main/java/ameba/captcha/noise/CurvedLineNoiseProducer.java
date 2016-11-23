@@ -12,6 +12,7 @@ import java.util.Random;
  * Adds a randomly curved line to the image.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class CurvedLineNoiseProducer implements NoiseProducer {
 
@@ -20,15 +21,27 @@ public class CurvedLineNoiseProducer implements NoiseProducer {
     private final Color _color;
     private final float _width;
 
+    /**
+     * <p>Constructor for CurvedLineNoiseProducer.</p>
+     */
     public CurvedLineNoiseProducer() {
         this(Color.BLACK, 3.0f);
     }
 
+    /**
+     * <p>Constructor for CurvedLineNoiseProducer.</p>
+     *
+     * @param color a {@link java.awt.Color} object.
+     * @param width a float.
+     */
     public CurvedLineNoiseProducer(Color color, float width) {
         _color = color;
         _width = width;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void makeNoise(BufferedImage image) {
         int width = image.getWidth();

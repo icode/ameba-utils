@@ -7,6 +7,7 @@ import java.util.Random;
  * Produces text of a given length from a given array of characters.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class DefaultTextProducer implements TextProducer {
 
@@ -19,10 +20,19 @@ public class DefaultTextProducer implements TextProducer {
     private final int _length;
     private final char[] _srcChars;
 
+    /**
+     * <p>Constructor for DefaultTextProducer.</p>
+     */
     public DefaultTextProducer() {
         this(DEFAULT_LENGTH, DEFAULT_CHARS);
     }
 
+    /**
+     * <p>Constructor for DefaultTextProducer.</p>
+     *
+     * @param length   a int.
+     * @param srcChars an array of char.
+     */
     public DefaultTextProducer(int length, char[] srcChars) {
         _length = length;
         _srcChars = copyOf(srcChars, srcChars.length);
@@ -35,6 +45,7 @@ public class DefaultTextProducer implements TextProducer {
         return copy;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getText() {
         String capText = "";

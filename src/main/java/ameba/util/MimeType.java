@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <p>MimeType class.</p>
+ *
  * @author icode
+ * @version $Id: $Id
  */
 public class MimeType {
     private final static Map<String, String> contentTypes = new HashMap<>();
@@ -17,6 +20,8 @@ public class MimeType {
     }
 
     /**
+     * <p>get.</p>
+     *
      * @param extension the extension
      * @return the content type associated with <code>extension</code>.  If no association is found, this method will
      * return <code>text/plain</code>
@@ -26,6 +31,8 @@ public class MimeType {
     }
 
     /**
+     * <p>get.</p>
+     *
      * @param extension the extension
      * @param defaultCt the content type to return if there is no known association for the specified extension
      * @return the content type associated with <code>extension</code> or if no associate is found, returns
@@ -37,6 +44,8 @@ public class MimeType {
     }
 
     /**
+     * <p>contains.</p>
+     *
      * @param extension the extension
      * @return <code>true</code> if the specified extension has been registered otherwise, returns <code>false</code>
      */
@@ -59,6 +68,8 @@ public class MimeType {
     }
 
     /**
+     * <p>getByFilename.</p>
+     *
      * @param fileName the filename
      * @return the content type associated with <code>extension</code> of the
      * given filename or if no associate is found, returns
@@ -69,6 +80,8 @@ public class MimeType {
     }
 
     /**
+     * <p>getByFilename.</p>
+     *
      * @param fileName    the filename
      * @param defaultType default Type
      * @return the content type associated with <code>extension</code> of the

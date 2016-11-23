@@ -4,7 +4,10 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 /**
+ * <p>FiveLetterFirstNameTextProducer class.</p>
+ *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class FiveLetterFirstNameTextProducer implements TextProducer {
 
@@ -1046,6 +1049,9 @@ public class FiveLetterFirstNameTextProducer implements TextProducer {
             "zuria", "zviad", "zylla"
     };
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getText() {
         int car = FIRST_NAMES.length - 1;

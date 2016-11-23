@@ -5,6 +5,12 @@ import ameba.util.IOUtils;
 
 import java.io.InputStream;
 
+/**
+ * <p>SampleUtil class.</p>
+ *
+ * @author icode
+ * @version $Id: $Id
+ */
 public class SampleUtil {
 
     /**
@@ -18,6 +24,12 @@ public class SampleUtil {
         return IOUtils.getResourceAsStream(filename);
     }
 
+    /**
+     * <p>readSample.</p>
+     *
+     * @param filename a {@link java.lang.String} object.
+     * @return a {@link ameba.captcha.audio.Sample} object.
+     */
     public static Sample readSample(String filename) {
         InputStream is = readResource(filename);
         return new Sample(is);

@@ -8,6 +8,7 @@ import java.security.SecureRandom;
  * Draws a 4-pixel thick straight red line through the given image.
  *
  * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @version $Id: $Id
  */
 public class StraightLineNoiseProducer implements NoiseProducer {
 
@@ -22,11 +23,18 @@ public class StraightLineNoiseProducer implements NoiseProducer {
         this(Color.RED, 4);
     }
 
+    /**
+     * <p>Constructor for StraightLineNoiseProducer.</p>
+     *
+     * @param color     a {@link java.awt.Color} object.
+     * @param thickness a int.
+     */
     public StraightLineNoiseProducer(Color color, int thickness) {
         _color = color;
         _thickness = thickness;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void makeNoise(BufferedImage image) {
         Graphics2D graphics = image.createGraphics();
